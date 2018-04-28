@@ -1,0 +1,9 @@
+body {
+    font-family: sans-serif;
+    line-height: 165%;
+    font-weight: 100;
+}
+
+a, a:visited, a:hover, a:active {
+    color: rgb(10, 150, 255);
+}
