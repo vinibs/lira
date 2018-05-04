@@ -14,13 +14,5 @@ var routes = [
     {
         path: '',
         setup: '/home/home'
-    },
-    {
-        path: '{oi}/abc/{ze}',
-        setup: 'other/other'
-    },
-    {
-        path: '*',
-        setup: '404/404'
     }
 ];
