@@ -554,8 +554,9 @@
             utilizando <i>GET</i>), <b>async</b>, que indica se a requisição deve ser assíncrona ou não (booleano,
             por padrão <i>true</i>), <b>headers</b>, lista de chave/valor que define os headers a serem enviados na
             requisição, <b>data</b>, que define os dados a serem enviados como parâmetros na requisição,
-            <b>contentType</b>, que espera o MIME type dos dados enviados na requisição, caso se aplique, e
-            <b>fail</b>, que espera uma função callback para execução em caso de falha da
+            <b>contentType</b>, que espera o MIME type dos dados enviados na requisição, caso se aplique,
+            <b>beforeSend</b>, que espera uma função callback que será executada antes de propriamente enviar a
+            requisição e <b>fail</b>, que espera uma função callback para execução em caso de falha da
             requisição, a qual também pode esperar um parâmetro, que contém o retorno dado pelo servidor.
         </p>
         <p>
@@ -569,6 +570,9 @@
             <pre>   <b>data</b>: {'name': 'Jack'}, <i class="comment">// Opcional. Aceita um ou mais dados para enviar na requisição</i></pre>
             <pre>   <b>contentType</b>: 'application/json; charset=utf-8', <i class="comment">// Opcional. Aceita o MIME type dos dados enviados</i></pre>
             <pre>   <b>async</b>: true, <i class="comment">// Opcional. True ou false - por padrão, <b>true</b></i></pre>
+            <pre>   <b>beforeSend</b>: function(){ <i class="comment">// Opcional. Função de callback para executar antes do envio da requisição</i></pre>
+            <pre>       // JS code here</pre>
+            <pre>   },</pre>
             <pre>   <b>success</b>: function(<i>data</i>){ <i class="comment">// Essencial. Função de callback em caso de sucesso</i></pre>
             <pre>       // JS code here</pre>
             <pre>   },</pre>
