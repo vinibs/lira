@@ -106,10 +106,6 @@
 				<li>src <i class="comment">&nbsp;&nbsp;// Estrutura básica do sistema</i></li>
 				<ul>
 					<li>app <i class="comment">&nbsp;&nbsp;// Contém os arquivos executados na aplicação</i></li>
-					<ul>
-						<li>global</li>
-						<li class="treefile">main.js  <i class="comment">&nbsp;&nbsp;// Código JS global, carregado por padrão em todas as páginas</i></li>
-					</ul>
                     <ul>
 						<li>pages</li>
 						<ul>
@@ -120,7 +116,13 @@
                                 <li class="treefile">home.page.js  <i class="comment">&nbsp;&nbsp;// Configurações de qual HTML, CSS e funções JS devem ser executados</i></li>
                             </ul>
 						</ul>
-						<li class="treefile">app.body.html  <i class="comment">&nbsp;&nbsp;// HTML carregado em todas as páginas do sistema, útil para layouts</i></li>
+                        <ul>
+                            <li>views <i class="comment"> // Arquivos HTML utilizados como template dentro do sistema</i></li>
+                            <ul>
+                                <li class="treefile">default.view.html  <i class="comment">&nbsp;&nbsp;// Arquivo de template padrão utilizado em caso de um template não ser definido no setup de uma página</i></li>
+                            </ul>
+                        </ul>
+						<li class="treefile">app.globalscripts.js  <i class="comment">&nbsp;&nbsp;// Código JS global, carregado por padrão em todas as páginas</i></li>
 						<li class="treefile">app.routes.js  <i class="comment">&nbsp;&nbsp;// Arquivo onde são registradas as rotas da aplicação</i></li>
 					</ul>
 					<li>assets <i class="comment">&nbsp;&nbsp;// Destinado a arquivos como imagens, fontes ou bibliotecas JS</i></li>
@@ -363,6 +365,11 @@
             <b>a partir da localização do arquivo atual</b>, para o arquivo HTML contendo o conteúdo da página.
         </p>
         <p>
+            Um outro recurso interessante é o atributo <b>"template"</b>, que define qual o arquivo de template,
+            dentro do diretório <b>views</b>, deve ser utilizado. Caso não seja definido no setup, será utilizado
+            o template "<b>default</b>" (default.view.html).
+        </p>
+        <p>
             Outros atributos são possíveis de serem utilizados. São eles o atributo <b>styleFile</b>, que, assim como
             "pageFile", indica um caminho <b>a partir do diretório do arquivo atual</b> para um arquivo CSS que será
             carregado apenas quando esta página for visitada, <b>attr</b>, que recebe atributos (valores, variáveis)
@@ -401,6 +408,7 @@
             <pre>   <b>attr:</b> { <i class="comment">// Passa um objeto cujos atributos podem ser acessados pela handler ou pelo HTML</i></pre>
             <pre>       workType: 1 <i class="comment">// Define um atributo qualquer desse objeto</i></pre>
             <pre>   },</pre>
+            <pre>   <b>template:</b> 'user', <i class="comment">// Define que o template a ser utilizado será o template "user" (<b>user.view.html</b>, dentro do diretório "views")</i></pre>
             <pre>   <b>handler:</b> function () { <i class="comment">// Define o código a ser executado durante a execução da rota e exibição da página</i></pre>
             <pre>       alert(<b>page.attr.workType</b>); <i class="comment">// Exibe o valor do atributo <b>workType</b> da página, definido no atributo <b>attr</b> deste mesmo arquivo</i></pre>
             <pre>       <i class="comment">// Output: "1"</i></pre>
@@ -472,19 +480,32 @@
         <br>
         <h3 id="htmltemplate">Template HTML</h3>
         <p>
-            É possível também criar um template em HTML para ser aplicado a todas as páginas. Entretanto, é possível
-            apenas gerar um único template.
+            É possível também criar templates em HTML para serem aplicados às páginas do sistema.
         </p>
         <p>
-            Para isso, basta construir o template com as estruturas comuns, como cabeçalhos, rodapés e menus no arquivo
-            <b>src<wbr>/app<wbr>/app.body.html</b>, mantendo, obrigatóriamente, o elemento
-            <b>&lt;div id="route-content"&gt;&lt;/div&gt;</b>, que é o responsável por incluir os conteúdos das demais
-            páginas na tela.
+            Para trabalhar com o sistema de templates existe o diretório <b>src<wbr>/app<wbr>/views</b>, onde devem
+            ficar armazenados todos os arquivos HTML que servem como templates. Eles devem seguir o padrão de
+            nomenclatura "<b>[nome desejado].view.html</b>", em que "[nome desejado]" representa o nome, propriamente dito,
+            dado ao template. Os templates são, a princípio, todos estilizados pelo arquivo de
+            <a href="#globalcss">CSS global</a>.
+        </p>
+        <p>
+            Para que estes templates funcionem de forma correta, é necessário que contenham um elemento (como uma
+            div, utilizada por padrão) que possua o atributo <b>id</b> com o valor "<b>route-content</b>".
         </p>
         <p>
             Este elemento é referente ao real corpo das páginas, portanto é importante que ele seja utilizado sempre
             como um <i>container</i> do corpo, não como cabeçalho, rodapé ou qualquer outro elemento principal da
             página.
+        </p>
+        <p>
+            Além de haver um template padrão, chamado de <b>default</b>, é possível criar novos templates para
+            utilizá-los em seu projeto.
+        </p>
+        <p>
+            A definição de qual template deve ser usado em uma página deve ser colocada dentro do <b>setup</b> de
+            uma página, dentro do atributo "<b>template</b>", conforme descrito em
+            <a href="#setup">arquivos de setup</a>.
         </p>
 
         <br>
