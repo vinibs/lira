@@ -301,6 +301,11 @@ var Core = (function(router) {
                                             // Volta ao topo da página apóes carregar o conteúdo
                                             window.scrollTo(0, 0);
 
+                                            // Remove o ícone de "loading"
+                                            var loading = document.getElementById("loading-marker")
+                                            if (loading !== undefined)
+                                                loading.removeAttribute("style");
+
                                             //console.log('HTML inserido')
                                         }
 
@@ -383,11 +388,6 @@ var Core = (function(router) {
                                 }, 20);
                             }
                         }
-
-                        // Remove o ícone de "loading"
-                        var loading = document.getElementById("loading-marker")
-                        if (loading !== undefined)
-                            loading.removeAttribute("style");
 
                         clearInterval(interval2);
                     }, 20);
