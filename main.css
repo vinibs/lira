@@ -2,6 +2,8 @@ body {
     font-family: sans-serif;
     line-height: 165%;
     font-weight: 100;
+    width: 100%;
+    height: 100%;
 }
 
 a, a:visited, a:hover, a:active {

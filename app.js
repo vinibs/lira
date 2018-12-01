@@ -688,6 +688,7 @@ var Router = (function() {
 
                 // Define o template atual como sendo o novo template a ser carregado
                 this.currentTemplate = templateName;
+
             });
         }
         // Senão, não faz nada e usa o mesmo
@@ -738,6 +739,10 @@ var App = (function() {
             document.head.appendChild(link);
             //console.log('importa CSS main');
         }
+
+        // Mostra o ícone de carregamento
+        var loadingMarker = document.getElementById("loading-marker");
+        loadingMarker.setAttribute('style', 'display:block');
 
         // Importa o arquivo com as rotas para a head da página
         var routeScript = document.getElementById("route-list");
