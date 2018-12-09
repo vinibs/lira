@@ -35,10 +35,12 @@ var Core = (function(router) {
             // Corrige possíveis referências quebradas
             if(!regex.test(links[i].getAttribute("href"))){
                 var url = links[i].getAttribute("href");
-
-                url = this.adjustUrl(url);
-                links[i].setAttribute("href", url);
-                this.router.setLink(links[i]);
+                // Verifica se o link tem um atributo href e o atualiza
+                if(url) {
+                    url = this.adjustUrl(url);
+                    links[i].setAttribute("href", url);
+                    this.router.setLink(links[i]);
+                }
             }
         }
 
