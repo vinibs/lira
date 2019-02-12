@@ -655,6 +655,8 @@ var Router = (function() {
 
                 // Área de conteúdo
                 var routeContent = document.getElementById("route-content");
+                if(routeContent === null)
+                    routeContent = document.getElementById("content-section");
 
                 routeContent.innerHTML = "<h1>Page not found </h1>";
                 routeContent.innerHTML += "<h4>(HTTP 404)</h4>";
@@ -663,6 +665,11 @@ var Router = (function() {
                 linkHome.setAttribute("href", router.basepath);
                 linkHome.appendChild(linkText);
                 routeContent.appendChild(linkHome);
+                var loading = document.getElementById('loading-marker');
+
+                if(loading && loading.style.display === 'block') {
+                    loading.setAttribute('style', 'display: none');
+                }
 
                 router.setLink(linkHome);
             }
