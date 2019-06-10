@@ -284,6 +284,7 @@ var Core = (function(router) {
                                 var htmlPath = core.toAbsolutePath(htmlFolder, page.pageFile);
                                 core.importFile(htmlPath, function (pageContent) {
                                     if (pageContent.response !== "") {
+                                        // routeContent.innerHTML = "";
 
                                         // Importa o HTML para a página, se houver
                                         if (pageContent.response !== core.pageContents[0].content) {
@@ -299,14 +300,6 @@ var Core = (function(router) {
                                             } else {
                                                 routeContent.innerHTML = pageContent.response;
                                             }
-
-                                            // Volta ao topo da página apóes carregar o conteúdo
-                                            window.scrollTo(0, 0);
-
-                                            // Remove o ícone de "loading"
-                                            var loading = document.getElementById("load-indicator")
-                                            if (loading !== undefined)
-                                                loading.removeAttribute("style");
 
                                             //console.log('HTML inserido')
                                         }
@@ -330,7 +323,7 @@ var Core = (function(router) {
                                     }
 
                                 });
-                            }
+                            }                            
 
 
                             // Importa o conteúdo CSS da página, caso haja
@@ -388,6 +381,18 @@ var Core = (function(router) {
                                         page.handler(getVars);
                                     }
                                 }, 20);
+                            }
+
+                            // Volta ao topo da página apóes carregar o conteúdo
+                            window.scrollTo(0, 0);
+
+                            // Remove o ícone de "loading"
+                            var loading = document.getElementById("load-indicator")
+                            if (loading !== undefined) {
+                                // Dá um delay para a exibição normal do loading
+                                let timeout = setTimeout(function() {
+                                    loading.removeAttribute("style");
+                                }, 100);
                             }
                         }
 
@@ -688,7 +693,7 @@ var Router = (function() {
         templateName = (templateName === undefined || templateName === null || templateName === '') ?
             'default' : templateName;
 
-        console.log({current: this.currentTemplate, template: templateName});
+        // console.log({current: this.currentTemplate, template: templateName});
 
         var router = this;
         if (this.currentTemplate !== templateName) {
@@ -696,10 +701,10 @@ var Router = (function() {
             this.core.importFile('src/app/views/'+templateName+'.view.html', function(data) {
                 // Carrega o conteúdo do template
                 document.getElementById("content-section").innerHTML = data.response;
+            
+                // Define o template atual
+                router.currentTemplate = templateName;
             });
-
-            // Define o template atual
-            this.currentTemplate = templateName;
         }
 
         // Senão, não faz nada e usa o mesmo
