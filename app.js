@@ -304,7 +304,7 @@ var Core = (function(router) {
                                             window.scrollTo(0, 0);
 
                                             // Remove o ícone de "loading"
-                                            var loading = document.getElementById("loading-marker")
+                                            var loading = document.getElementById("load-indicator")
                                             if (loading !== undefined)
                                                 loading.removeAttribute("style");
 
@@ -665,7 +665,7 @@ var Router = (function() {
                 linkHome.setAttribute("href", router.basepath);
                 linkHome.appendChild(linkText);
                 routeContent.appendChild(linkHome);
-                var loading = document.getElementById('loading-marker');
+                var loading = document.getElementById('load-indicator');
 
                 if(loading && loading.style.display === 'block') {
                     loading.setAttribute('style', 'display: none');
@@ -688,18 +688,20 @@ var Router = (function() {
         templateName = (templateName === undefined || templateName === null || templateName === '') ?
             'default' : templateName;
 
+        console.log({current: this.currentTemplate, template: templateName});
+
         var router = this;
         if (this.currentTemplate !== templateName) {
             // Importa o template e chama o callback
             this.core.importFile('src/app/views/'+templateName+'.view.html', function(data) {
                 // Carrega o conteúdo do template
                 document.getElementById("content-section").innerHTML = data.response;
-
-                // Define o template atual como sendo o novo template a ser carregado
-                this.currentTemplate = templateName;
-
             });
+
+            // Define o template atual
+            this.currentTemplate = templateName;
         }
+
         // Senão, não faz nada e usa o mesmo
 
 
@@ -750,7 +752,7 @@ var App = (function() {
         }
 
         // Mostra o ícone de carregamento
-        var loadingMarker = document.getElementById("loading-marker");
+        var loadingMarker = document.getElementById("load-indicator");
         loadingMarker.setAttribute('style', 'display:block');
 
         // Importa o arquivo com as rotas para a head da página
@@ -885,7 +887,7 @@ var App = (function() {
 });
 
 function showLoading () {
-    var loading = document.getElementById('loading-marker');
+    var loading = document.getElementById('load-indicator');
     loading.setAttribute('style', 'display: block');
 }
 
