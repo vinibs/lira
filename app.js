@@ -392,7 +392,7 @@ var Core = (function(router) {
                                 // Dá um delay para a exibição normal do loading
                                 let timeout = setTimeout(function() {
                                     loading.removeAttribute("style");
-                                }, 100);
+                                }, 150);
                             }
                         }
 
@@ -692,8 +692,6 @@ var Router = (function() {
 
         templateName = (templateName === undefined || templateName === null || templateName === '') ?
             'default' : templateName;
-
-        // console.log({current: this.currentTemplate, template: templateName});
 
         var router = this;
         if (this.currentTemplate !== templateName) {
