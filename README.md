@@ -1,3 +1,4 @@
+![alt text](src/assets/img/lira.png)
 # Bem-vindo ao LiraJS
 O Lira é um microframework para a criação de simples Single Page Applications com JavaScript puro.
 
