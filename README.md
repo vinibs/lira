@@ -1,6 +1,7 @@
 # Bem-vindo ao LiraJS
 O Lira é um microframework para a criação de simples Single Page Applications com JavaScript puro.
 
+![alt text](src/assets/img/lira.png)
 
 ## Uma estrutura básica, para aplicações básicas
 Oferece uma estrutura básica para roteamento e geração de páginas para uma aplicação de página única (SPA) simples.
