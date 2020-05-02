@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Documentação Lira</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Vinicius Baroni Soares">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="docstyle.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+
+    <div id="sidebar">
+        <a href="#"><h3>Início</h3></a>
+        <a href="#installing"><h3>Download e instalação</h3></a>
+        <a href="#updating"><h3>Atualização do framework</h3></a>
+        <a href="#basicstructure"><h3>Etrutura básica</h3></a>
+        <a href="#basicoperation"><h3>Funcionamento básico</h3></a>
+        <a href="#initialconfiguration"><h3>Configuração inicial</h3></a>
+        <a href="#routes"><h3>Rotas</h3></a>
+        <ul class="nolist">
+            <a href="#routecreation"><li>Criação de uma rota</li></a>
+            <a href="#paramroute"><li>Rota com parâmetros</li></a>
+        </ul>
+        <a href="#setup"><h3>Arquivos de setup</h3></a>
+        <ul class="nolist">
+            <a href="#setupcreation"><li>Criação de um setup</li></a>
+            <a href="#paramhandler"><li>Handler com parâmetros</li></a>
+        </ul>
+        <a href="#pageviews"><h3>Views das páginas</h3></a>
+        <ul class="nolist">
+            <a href="#htmltemplate"><li>Template HTML</li></a>
+            <a href="#htmlcontent"><li>Conteúdo HTML</li></a>
+            <a href="#paramhandler"><li>CSS global</li></a>
+            <a href="#paramhandler"><li>CSS exclusivo</li></a>
+        </ul>
+        <a href="#handlerfunctions"><h3>Funções para a handler</h3></a>
+        <ul class="nolist">
+            <a href="#functionajax"><li>ajax()</li></a>
+            <a href="#functionredirect"><li>redirect()</li></a>
+        </ul>
+    </div>
+
+    <div id="content">
+		<span class="maintitle">
+            <span alt="Logo" id="logo">Lira</span>
+
+            <h3>Simplicidade e organização.</h3>
+		</span>
+
+        <h4><a href="http://github.com/vinibs/lira" target="_blank" class="textcenter">GitHub</a></h4>
+
+        <br><br>
+
+
+        <p class="obs">
+            <b>Atenção:</b> ao iniciar um projeto utilizando o Lira, é preciso ajustar a tag <b>&lt;base&gt;</b>
+            no arquivo <b>index.html</b> alterando seu valor para indicar a raiz do projeto, sempre iniciando
+            e terminando com "<b>/</b>". Por exemplo, se a raiz do projeto estiver em um diretório chamado "lira",
+            na raiz do servidor, o caminho base será "<b>/lira/</b>". Veja mais em
+            <a href="#initialconfiguration">configuração inicial</a>.
+        </p>
+
+        <br>
+
+
+        <h2 id="installing">Download e instalação</h2>
+        <p>
+            Para baixar o Lira, é preciso acessar <a href="https://github.com/vinibs/lira" target="_blank">a
+            página no GitHub</a> e realizar o download do <b>.zip</b> contendo toda a estrutura.
+            Então, basta descompactar os arquivos e configurar o <a href="#sysconst">caminho base</a>.
+        </p>
+
+        <br>
+
+        <h2 id="updating">Atualização do framework</h2>
+        <p>
+            Quando for necessário atualizar o framework, a forma mais prática de fazê-lo, sem que haja perda
+            ou sobrescrita dos dados ou configurações já realizados no projeto, é baixar o arquivo
+            <b>app.js</b> novamente e substituí-lo na raiz do projeto. Entretanto, é importante sempre
+            observar se não houve alterações na <a href="#basicstructure">estrutura básica</a> de arquivos.
+        </p>
+
+
+        <br><br>
+
+        <h2 id="basicstructure">Estrutura básica</h2>
+        <p>
+            Uma vez colocados os arquivos base do sistema em um diretório para iniciar o desenvolvimento,
+            basta montar suas páginas com seus arquivos HTML, JavaScript e CSS, colocando-os em seus lugares
+            dentro do sistema para começar a criar um pequeno sistema em página única maravilhoso.
+        </p>
+        <p>
+            A estrutura básica não é muito grande ou complexa. Ainda assim, merece atenção para que
+            cada componente esteja em seu devido lugar durante o desenvolvimento da aplicação.
+        </p>
+        <p>
+            A relação dos diretórios padrão é a seguinte, podendo diferir dos de diretórios
+            e arquivos baixados do repositório, mas contendo o essencial e ideal para a
+            execução do sistema:
+        </p>
+        <span class="dirtree">
+		<ul>
+			<li>/ <i class="grayfont" style="font-weight: lighter;">(raiz da aplicação)</i></li>
+			<ul>
+				<li>src <i class="comment">&nbsp;&nbsp;// Estrutura básica do sistema</i></li>
+				<ul>
+					<li>app <i class="comment">&nbsp;&nbsp;// Contém os arquivos executados na aplicação</i></li>
+                    <ul>
+						<li>pages</li>
+						<ul>
+                            <li>home <i class="comment">&nbsp;&nbsp;// Arquivos executados como a página inicial do sistema</i></li>
+                            <ul>
+                                <li class="treefile">home.page.css <i class="comment">&nbsp;&nbsp;// Estilo destinado unicamente a esta página</i></li>
+                                <li class="treefile">home.page.html  <i class="comment">&nbsp;&nbsp;// HTML incluso no corpo do documento</i></li>
+                                <li class="treefile">home.page.js  <i class="comment">&nbsp;&nbsp;// Configurações de qual HTML, CSS e funções JS devem ser executados</i></li>
+                            </ul>
+						</ul>
+                        <ul>
+                            <li>views <i class="comment"> // Arquivos HTML utilizados como template dentro do sistema</i></li>
+                            <ul>
+                                <li class="treefile">default.view.html  <i class="comment">&nbsp;&nbsp;// Arquivo de template padrão utilizado em caso de um template não ser definido no setup de uma página</i></li>
+                            </ul>
+                        </ul>
+						<li class="treefile">app.globalscripts.js  <i class="comment">&nbsp;&nbsp;// Código JS global, carregado por padrão em todas as páginas</i></li>
+						<li class="treefile">app.routes.js  <i class="comment">&nbsp;&nbsp;// Arquivo onde são registradas as rotas da aplicação</i></li>
+					</ul>
+					<li>assets <i class="comment">&nbsp;&nbsp;// Destinado a arquivos como imagens, fontes ou bibliotecas JS</i></li>
+					<ul>
+						<li>img</li>
+						<ul>
+							<li class="treefile">lira.png</li>
+						</ul>
+					</ul>
+                </ul>
+				<li class="treefile">.htaccess</li>
+				<li class="treefile">app.js <i class="comment">&nbsp;&nbsp;// Arquivo JavaScript contendo toda a base do sistema</i></li>
+				<li class="treefile">favicon.png <i class="comment">&nbsp;&nbsp;// Ícone aplicado por padrão a todas as páginas</i></li>
+				<li class="treefile">index.html <i class="comment">&nbsp;&nbsp;// Arquivo HTML que receberá todas as requisições</i></li>
+				<li class="treefile">LICENSE</li>
+				<li class="treefile">main.css <i class="comment">&nbsp;&nbsp;// Arquivo de estilos global, aplicado a todas as páginas</i></li>
+				<li class="treefile">robots.txt</li>
+			</ul>
+		</ul>
+		</span>
+
+
+        <br><br>
+
+        <h2 id="basicoperation">Funcionamento básico</h2>
+        <p>
+            O Lira possui um funcionamento relativamente simples. Como pode ser observado na seção de
+            <a href="#basicstructure">estrutura básica</a>, há diretórios específicos para o armazenamento
+            das páginas que irão compor o código completo da tela do sistema. O diretório <b>"pages"</b>
+            espera que haja um diretório específico para cada página do sistema e, dentro de cada um destes,
+            espera-se que haja ao menos um arquivo <b>.page.js</b> e um <b>.page.html</b>.
+        </p>
+        <p>
+            O <b>arquivo JavaScript</b> é responsável por indicar ao roteador qual deverá ser o HTML carregado
+            na página, bem como qual arquivo CSS (se houver) será carregado exclusivamente para essa tela, alguns
+            atributos da página, como variáveis, o título da página e código JavaScript a ser executado ao
+            renderizar a tela. Veja em mais detalhes na seção <a href="#setup">arquivos de setup</a>.
+        </p>
+        <p>
+            Já o <b>arquivo HTML</b> é responsável por fornecer ao JS todo o código específico a ser renderizado
+            na tela. Ao contrário de alguns frameworks JavaScript, o Lira <b>não fornece funções embutidas ao HTML
+            para processamento</b>, portanto funcionalidades como condições e loops são realizados no <b>handler</b>
+            definido no arquivo JS. Mais informações estão disponíveis na seção 
+            <a href="#htmltemplate">template HTML</a>.
+        </p>
+        <p>
+            Para carregar estes dados e renderizá-los no navegador, existe o roteador interno. Ele realiza simples
+            procedimentos para carregar os componentes da página. São eles:
+            <ul>
+                <li>
+                    Ler as rotas do arquivo <b>app.routes.js</b> e verificar se alguma corresponde à URL da
+                    requisição atual
+                </li>
+                <li>
+                    Buscar, dentro do diretório <b>/src<wbr>/app<wbr>/pages</b>, pelo arquivo que tenha a extensão
+                    <b>".page.js"</b>, seguindo a hierarquia de diretórios e o nome do arquivo presentes no
+                    atributo <b>"setup"</b> da rota.
+                </li>
+                <li>
+                    Obter as informações sobre qual HTML e CSS usar, quais comandos devem ser executados ao renderizar
+                    a página
+                </li>
+                <li>
+                    Carregar o HTML do arquivo dentro do layout definido em <b>app.body.html</b>, inserir o CSS e
+                    executar o código JS definido, caso hajam estes dois últimos.
+                </li>
+            </ul>
+        </p>
+        <p>
+            Veja mais sobre a preparação do roteamento em <a href="#routes">rotas</a>.
+        </p>
+
+
+        <br><br>
+
+        <h2 id="initialconfiguration">Configuração inicial</h2>
+        <p>
+            Para iniciar um projeto com o Lira é necessário realizar uma pequena configuração inicial. Após
+            extrair os arquivos baixados e colocá-los em um diretório no seu servidor, deve-se configurar o
+            caminho que identifica a raiz da aplicação.
+        </p>
+        <p>
+            Para isso, é preciso abrir o arquivo <b>index.html</b> e editar a tag <b>&lt;base&gt;</b>, adicionando
+            à propriedade <b>href</b> o caminho referente ao diretório raiz da sua aplicação <b>a partir da raiz
+            do servidor</b>. Por exemplo, se o Lira compuser diretamente a raiz do servidor, o caminho fica apenas
+            <b>"/"</b>. Entretanto, se, na raiz do servidor houver um diretório chamado, por exemplo, de "spa",
+            o caminho seria <b>"/spa/"</b>.
+        </p>
+        <p>
+            Também é importante ter em mente que, para que a plicação funcione corretamente, incluindo o roteamento
+            e as demais funcionalidades, <b>é preciso que o projeto esteja rodando sobre um servidor HTTP</b>,
+            e que <b>haja um arquivo de configuração que redirecione todas as requisições ao arquivo
+            <i>index.html</i></b>, como é o caso do arquivo <i>.htaccess</i> incluído por padrão na estrutura,
+            que realiza esta função no servidor Apache.
+        </p>
+        <p class="obs">
+            Observe que todo e qualquer caminho aplicado à tag <b>&lt;base&gt;</b>, por
+            se tratar de uma tag do próprio padrão HTML, <b>deve ser iniciada com "/" <i>E</i> finalizada com uma outra
+            "/"</b> quando fizer referência a um caminho interno e, como, por definição, aqui tratamos apenas de
+            caminhos internos do servidor, <b>é necessário</b> que o atributo <i>href</i> contenha um valor neste
+            padrão. Caso contrário, a aplicação não funcionará corretamente.
+        </p>
+
+
+        <br><br>
+
+        <h2 id="routes">Rotas</h2>
+        <p>
+            O Lira possui um sistema interno de roteamento, em que a cada requisição é buscado no arquivo
+            <b>app.routes.js</b> um objeto que possua o valor <b>path</b> equivalente à URL da requisição
+            atual.
+        </p>
+
+        <br>
+
+        <h3 id="routecreation">Criação de uma rota</h3>
+        <p>
+            Para definir uma rota, é necessário editar o arquivo <b>app.routes.js</b>, localizado no diretório
+            <b>src<wbr>/app</b>. Neste arquivo há a definição de um vetor de objetos. Uma rota é um objeto,
+            dentro deste vetor, que contenha dois atributos: <b>path</b> e <b>setup</b>.
+        </p>
+        <p>
+            O atributo <b>path</b> representa o caminho de URL que será identificado. Este caminho pode conter
+            parâmetros variáveis ou não. Para mais informações, veja <a href="#paramroute">rota com parâmetros</a>.
+        </p>
+        <p>
+            Este caminho deve ser referente à raiz da aplicação. Pode tanto ser iniciado por uma "/" ou não, bem
+            como ser também finalizado por uma barra ou não. Ou seja, uma rota <b>"pagina1/pagina2"</b> é
+            equivalente a <b>"/pagina1/pagina2"</b>, <b>"pagina1/pagina2/"</b>, <b>"/pagina1/pagina2/"</b>.
+        </p>
+        <p>
+            Há também, para o atributo <b>path</b>, um <b>"operador coringa"</b>, que pode ser usado para indicar
+            qualquer rota que não pertença às rotas declaradas anteriormente. Tal operador é o caractere <b>"*"</b>.
+            Quando utilizado, deve ser escrito como última rota do arquivo ou, caso contrário, as rotas que estiverem
+            após esta, no vetor, não serão reconhecidas.
+        </p>
+        <p>
+            O atributo <b>setup</b>, por sua vez, espera um caminho, a partir do diretório
+            <b>src<wbr>/app<wbr>/pages</b>, para um arquivo de setup com a extensão <b>.page.js</b>. Este arquivo
+            deve ser referenciado sem a extensão neste atributo e a hierarquia de diretórios é demarcada pelo
+            caractere <b>"/"</b>. Por exemplo, se houver um arquivo cujo caminho seja
+            <b>src<wbr>/app<wbr>/pages<wbr>/funcionario<wbr>/funcionario.page.js</b>, o atributo <i>setup</i>
+            deve conter apenas o caminho <b>funcionario/funcionario</b> (que também pode ou não iniciar ou encerrar
+            com uma barra).
+        </p>
+        <p>
+            Veja um exemplo de objeto de rota, em que o caminho da rota é <b>"/pessoas/lista"</b> e o setup está
+            localizado em <b>"src<wbr>/app<wbr>/pages<wbr>/pessoas<wbr>/lista.page.js"</b>:
+        </p>
+        <span class="pregroup">
+			<pre>{</pre>
+            <pre>   <b>path:</b> 'pessoas/lista', <i class="comment">// Identifica o caminho da rota, a URL</i></pre>
+			<pre>   <b>setup:</b> 'pessoas/lista' <i class="comment">// Identifica que deve ser carregado o arquivo <b>lista.page.js</b> de dentro do diretório <b>src/app/pages/pessoas</b></i></pre>
+			<pre>}</pre>
+		</span>
+        <p>
+            Um outro exemplo, utilizando o caractere coringa para definir uma página de erro 404:
+        </p>
+        <span class="pregroup">
+			<pre>{</pre>
+            <pre>   <b>path:</b> '*', <i class="comment">// Indica, pelo operador coringa, que qualquer rota que não estja entre as anteriores deverá chamar a página de erro 404</i></pre>
+			<pre>   <b>setup:</b> 'erros/404' <i class="comment">// Identifica que deve ser carregado o arquivo <b>404.page.js</b> de dentro do diretório <b>src/app/pages/erros</b></i></pre>
+			<pre>}</pre>
+		</span>
+
+        <p class="obs">
+            <b>Nota:</b> observe que o atributo <b>path</b> quando deixado com uma string vazia (<b>""</b>) é
+            equivalente à rota <b>"/"</b>, ou seja, se refere à raiz da aplicação. Se algum dos atributos da rota
+            não for definido, o roteador não funcionará corretamente.
+        </p>
+
+        <br>
+
+        <h3 id="paramroute">Rota com parâmetros</h3>
+        <p>
+            Também é possível definir rotas que esperam parâmetros (variáveis) através da URL. Por exemplo, caso seja
+            necessário passar um código identificador para ser enviado em uma requisição AJAX, é possível que ele seja
+            passado através da URL utilizando a notação <b>"{nome_var}"</b>, onde <b>"nome_var"</b> representa o nome
+            que identificará a variável no código JavaScript da página.
+        </p>
+        <p>
+            Por exemplo, se uma rota "cliente" esperar um identificador para fazer a requisição ao servidor dos dados
+            de um cliente específico, pode-se definir o <b>path</b> da rota como <b>"cliente/{cod}"</b>. Desta forma,
+            será enviada à função <i>handler</i> do arquivo definido em <i>setup</i> uma variável como parâmetro. Isso
+            implica que tal função <b>deve esperar um argumento</b> em sua declaração.
+        </p>
+        <p>
+            Como parâmetro é passado um objeto em que seus atributos têm como nome o texto especificado na rota (no caso
+            do exemplo, <b>"cod"</b>) e como valor o dado passado através da URL de acesso à página.
+        </p>
+        <p>
+            Um exemplo de uso de uma rota com parâmetros:
+        </p>
+
+        <span class="pregroup">
+			<pre>{</pre>
+            <pre>   <b>path:</b> 'cliente/{id}/ver', <i class="comment">// Indica que será passado um atributo chamado "id" com o valor dado na URL, nesta mesma posição da string, no objeto enviado como parâmetro para a função <b>handler</b> do setup</i></pre>
+			<pre>   <b>setup:</b> 'cliente/ver' </pre>
+			<pre>}</pre>
+		</span>
+        <p>
+            Também é possível passar mais de um parâmetro na rota, como por exemplo em
+            <b>"section<wbr>/{attr1}<wbr>/{attr2}<wbr>/file<wbr>/{attr3}</b>.
+        </p>
+
+        <p class="obs">
+            <b>Nota:</b> observe que é preciso definir, na função <b>handler do arquivo de setup</b>, um atributo a
+            ser passado na declaração da função, para que o dado obtido possa ser utilizado. Veja mais em
+            <a href="#setup">arquivos de setup</a>.
+        </p>
+
+        <br><br>
+
+        <h2 id="setup">Arquivos de setup</h2>
+        <p>
+            Arquivos de setup são arquivos JavaScript que especificam ao roteador que HTML deve ser carregado, o
+            título da página, quais variáveis devem ser acessíveis durante a execução da página, qual processamento
+            JS deve ser executado ao carregar a tela e qual arquivo de estilo específico para aquela página deve ser
+            carregado ao ser identificada uma determinada rota.
+        </p>
+        <p>
+            Em outras palavras, o <b>arquivo de setup</b> referenciado por uma <a href="#routes">rota</a> indica ao
+            roteador o que deve ser carregado na tela e o que deve ser executado ao carregar a página quando esta
+            rota for acessada por um usuário. Pode-se dizer também que é o arquivo que faz a mágica acontecer.
+        </p>
+
+        <br>
+        <h3 id="setupcreation">Criação de um setup</h3>
+        <p>
+            Para criar um arquivo de setup, deve-se criar um arquivo JavaScript com a extensão <b>".page.js"</b> dentro
+            de um diretório específico para a página (ou grupo de páginas com alguma característica em comum), dentro
+            do diretório <b>"src<wbr>/app<wbr>/pages"</b>. Essa organização é importante para a manutenção do sistema
+            e também para que o roteador funcione corretamente. Veja mais em
+            <a href="#vieworganization">organização de views</a>.
+        </p>
+        <p>
+            Um arquivo de setup basicamente é uma atribuição de um objeto JSON a uma variável JavaScript já existente
+            chamada "page". O objeto <b>deve ter, obrigatóriamente</b>, os atributos <b>"title"</b>, que representa
+            o título carregado na janela do navegador do cliente, e <b>pageFile</b>, que indica o caminho,
+            <b>a partir da localização do arquivo atual</b>, para o arquivo HTML contendo o conteúdo da página.
+        </p>
+        <p>
+            Um outro recurso interessante é o atributo <b>"template"</b>, que define qual o arquivo de template,
+            dentro do diretório <b>views</b>, deve ser utilizado. Caso não seja definido no setup, será utilizado
+            o template "<b>default</b>" (default.view.html).
+        </p>
+        <p>
+            Outros atributos são possíveis de serem utilizados. São eles o atributo <b>styleFile</b>, que, assim como
+            "pageFile", indica um caminho <b>a partir do diretório do arquivo atual</b> para um arquivo CSS que será
+            carregado apenas quando esta página for visitada, <b>attr</b>, que recebe atributos (valores, variáveis)
+            que ficam acessíveis tanto ao HTML - com códigos JS inline, como "onclick", por exemplo - quanto à função
+            <b>handler</b>, outro atributo possível, que espera uma função anônima contendo todo o conteúdo JavaScript
+            que deve ser executado nesta página, sejam códigos estruturais ou funções que podem inclusive ser chamadas
+            por elementos HTML com código JS inline.
+        </p>
+        <p>
+            Para mais informações sobre as funções pré-existentes para uso na função <b>handler</b>, veja a seção
+            <a href="#handlerfunctions">funções para a handler</a>.
+        </p>
+        <p>
+            Um exemplo de um arquivo de setup encontra-se abaixo.
+        </p>
+        <span class="pregroup">
+            <pre><b>src/app/pages/main/home.page.js</b>:</pre>
+            <pre></pre>
+			<pre>page = {</pre>
+            <pre>   <b>title:</b> 'Jony\'s Blog - Home', <i class="comment">// Define o título da página</i></pre>
+			<pre>   <b>pageFile:</b> 'home.page.html', <i class="comment">// Indica que deve ser carregado o arquivo <b>home.page.html</b></i></pre>
+			<pre>}</pre>
+		</span>
+        <p>
+            Veja também um novo exemplo, contendo um modelo de aplicação de todos os atributos possíveis. Note que o
+            arquivo se encontra em um diretório específico para os arquivos referentes a esta página, e, portanto, um
+            diretório distinto do usado no exemplo anterior.
+        </p>
+        <span class="pregroup">
+            <pre><b>src/app/pages/works/works.page.js</b>:</pre>
+            <pre></pre>
+			<pre>page = {</pre>
+            <pre>   <b>title:</b> 'Jony\'s Blog - Works',</pre>
+			<pre>   <b>pageFile:</b> 'works.page.html',</pre>
+			<pre>   <b>styleFile:</b> 'works.page.css', <i class="comment">// Indica que deve ser carregado o estilo <b>works.page.css</b></i></pre>
+            <pre>   <b>attr:</b> { <i class="comment">// Passa um objeto cujos atributos podem ser acessados pela handler ou pelo HTML</i></pre>
+            <pre>       workType: 1 <i class="comment">// Define um atributo qualquer desse objeto</i></pre>
+            <pre>   },</pre>
+            <pre>   <b>template:</b> 'user', <i class="comment">// Define que o template a ser utilizado será o template "user" (<b>user.view.html</b>, dentro do diretório "views")</i></pre>
+            <pre>   <b>handler:</b> function () { <i class="comment">// Define o código a ser executado durante a execução da rota e exibição da página</i></pre>
+            <pre>       alert(<b>page.attr.workType</b>); <i class="comment">// Exibe o valor do atributo <b>workType</b> da página, definido no atributo <b>attr</b> deste mesmo arquivo</i></pre>
+            <pre>       <i class="comment">// Output: "1"</i></pre>
+            <pre>           </pre>
+            <pre>       <i class="comment">// Any JS Code here</i></pre>
+            <pre>   } </pre>
+			<pre>}</pre>
+		</span>
+        <p class="obs">
+            <b>Nota:</b> qualquer atributo definido em <b>attr</b> é invocado através da chamada
+            <b>page.attr.[nome_atributo]</b>, onde <b>"[nome_atributo]"</b> representa o nome dado ao atributo, que,
+            no caso do exemplo, é <b>workType</b>.
+        </p>
+
+        <br>
+        <h3 id="paramhandler">Handler com parâmetros</h3>
+        <p>
+            Quando se define uma <a href="#paramroute">rota com parâmetros</a> é preciso indicar à função
+            <b>handler</b> de um arquivo de setup que espera-se receber um parâmetro. Para isso, basta, na declaração
+            da função, adicionar uma variável qualquer como atributo. Um nome adequado pode ser <b>"get"</b>, visto
+            que são dados vindos de uma requisição GET. Entretanto, o nome da variável fica a cargo do desenvolvedor.
+        </p>
+        <p>
+            Dentro da função handler, por sua vez, para acessar os dados vindos por parâmetro get, basta acessar,
+            através do nome dado ao atributo na rota (como "{id}", por exemplo), o atributo da variável passada como
+            parâmetro para a função.
+        </p>
+        <p>
+            Por exemplo, se o parâmetro se chamar <b>"get"</b> e o atributo definido na rota se chamar <b>"id"</b>,
+            seu valor é acessível, dentro da função handler, por <b>get.id</b>.
+        </p>
+        <p>
+            Veja um exemplo de uso de uma rota com parâmetros em conjunto com um handler com parâmetros, assumindo
+            que são passados dois atributos pela URL: "id" e "nome":
+        </p>
+        <span class="pregroup">
+            <pre>Route attributes: <b>id, nome</b></pre>
+            <pre></pre>
+			<pre>page = {</pre>
+            <pre>   <b>...</b></pre>
+            <pre>   handler: function (<b>get</b>) { <i class="comment">// Recebe a o parâmetro com os valores</i></pre>
+            <pre>       alert(<b>get.id</b>); <i class="comment">// Exibe o valor do <b>id</b> passado pela rota</i></pre>
+            <pre>       alert(<b>get.nome</b>); <i class="comment">// Exibe o valor do <b>nome</b> passado pela rota</i></pre>
+            <pre>   } </pre>
+			<pre>}</pre>
+		</span>
+
+        <br><br>
+
+        <h2 id="pageviews">Views das páginas</h2>
+        <p>
+            A view de uma página é feita, primordialmente, por um arquivo HTML contendo o conteúdo que deve ser
+            renderizado e exibido. Este arquivo deve estar no diretório <b>src<wbr>/app<wbr>/pages</b> e,
+            preferencialmente, em um diretório específico para a tela em questão, junto ao setup que renderizará
+            este arquivo. Além disso, também é possível definir um arquivo CSS que será aplicado individualmente à
+            página, ou seja, propriedades que não se propagarão para outras telas. Entretanto, conforme explicitado
+            em <a href="#setup">arquivos de setup</a>, tanto o arquivo HTML quanto o CSS, se houver, devem ser
+            indicados no arquivo JS que gerencia a página.
+        </p>
+        <p>
+            É recomendável que o arquivo HTML conte com a extensão <b>".page.html"</b>, enquanto que o arquivo CSS
+            tenha a extensão <b>".page.css"</b> e que seu nome faça referência à página ou rota a que se aplica.
+            Assim, um arquivo <b>cliente.page.js</b> estaria em conjunto com os arquivos <b>cliente.page.html</b> e
+            <b>cliente.page.css</b>, dentro de um diretório <b>"cliente"</b>. Isso por uma questão de organização.
+            Entretanto, pode-se colocar qualquer nome e pode-se ou não utilizar <b>".page"</b> nos nomes dos arquivos,
+            desde que a referência dentro do arquivo de setup a estes arquivos esteja correta.
+        </p>
+
+        <br>
+        <h3 id="htmltemplate">Template HTML</h3>
+        <p>
+            É possível também criar templates em HTML para serem aplicados às páginas do sistema.
+        </p>
+        <p>
+            Para trabalhar com o sistema de templates existe o diretório <b>src<wbr>/app<wbr>/views</b>, onde devem
+            ficar armazenados todos os arquivos HTML que servem como templates. Eles devem seguir o padrão de
+            nomenclatura "<b>[nome desejado].view.html</b>", em que "[nome desejado]" representa o nome, propriamente dito,
+            dado ao template. Os templates são, a princípio, todos estilizados pelo arquivo de
+            <a href="#globalcss">CSS global</a>.
+        </p>
+        <p>
+            Para que estes templates funcionem de forma correta, é necessário que contenham um elemento (como uma
+            div, utilizada por padrão) que possua o atributo <b>id</b> com o valor "<b>route-content</b>".
+        </p>
+        <p>
+            Este elemento é referente ao real corpo das páginas, portanto é importante que ele seja utilizado sempre
+            como um <i>container</i> do corpo, não como cabeçalho, rodapé ou qualquer outro elemento principal da
+            página.
+        </p>
+        <p>
+            Além de haver um template padrão, chamado de <b>default</b>, é possível criar novos templates para
+            utilizá-los em seu projeto.
+        </p>
+        <p>
+            A definição de qual template deve ser usado em uma página deve ser colocada dentro do <b>setup</b> de
+            uma página, dentro do atributo "<b>template</b>", conforme descrito em
+            <a href="#setup">arquivos de setup</a>.
+        </p>
+
+        <br>
+        <h3 id="htmlcontent">Conteúdo HTML</h3>
+        <p>
+            O conteúdo de uma página deve ser definido em um arquivo HTML, dentro do diretório referente à página,
+            conforme colocado em <a href="#pageviews">views das páginas</a>. Este arquivo, por uma questão de
+            organização, é recomendável que possua como extensão <b>".page.html"</b>.
+        </p>
+        <p>
+            O arquivo deve conter todo o conteúdo a ser inserido dentro do elemento
+            <b>&lt;div id="route-content"&gt;&lt;/div&gt;</b> no arquivo <b>src<wbr>/app<wbr>/app.body.html</b>. Assim,
+            pode-se construir toda uma página ou mesmo apenas seu corpo para ser encaixado em um template global, como
+            descrito em <a href="#htmltemplate">template HTML</a>.
+        </p>
+
+        <br>
+        <h3 id="globalcss">CSS global</h3>
+        <p>
+            Para a construção das página, existe por padrão um arquivo CSS que é aplicado globalmente a todas as telas
+            da aplicação. O arquivo <b>main.css</b> encontra-se na raiz do projeto e contém todas as regras de estilo
+            aplicadas às páginas.
+        </p>
+        <p>
+            É possível, portanto, organizar todo o CSS da aplicação em um único arquivo de estilo, já pré-existente no
+            projeto desde o momento de sua criação. Entretanto, também é possível especificar arquivos de CSS com
+            regras específicas para cada página através dos <a href="#exclusivecss">CSS exclusivo</a>.
+        </p>
+
+        <br>
+        <h3 id="exclusivecss">CSS exclusivo</h3>
+        <p>
+            Além do uso de um arquivo <a href="#globalcss">CSS global</a>, também é possível utilizar arquivos CSS
+            exclusivos para uma determinada página ao carregá-la através de uma rota. Um arquivo de CSS exclusivo
+            deve ser criado junto ao HTML da página, por questões de organização, e conter a extensão
+            <b>.page.css</b>, conforme citado em <a href="#pageviews">views das páginas</a>.
+        </p>
+        <p>
+            Para que o arquivo CSS seja carregado, entretanto, é necessário que ele seja referenciado no arquivo de
+            setup da página. Mais informações podem ser encontradas em <a href="#setup">arquivos de setup</a>.
+        </p>
+
+        <br><br>
+
+        <h2 id="handlerfunctions">Funções para a handler</h2>
+        <p>
+            Existem também algumas poucas funções criadas para simplificar funcionalidades na hora de realizar o
+            processamento em JavaScript na aplicação. Estas funções são métodos do objeto global <b>app</b>,
+            instanciado automaticamente durante a execução do projeto.
+        </p>
+        <p>
+            Tais funções podem ser chamadas e utilizadas na função <b>handler</b>, onde são definidas as ações JS a
+            serem executadas ao renderizar uma página, conforme descrito em <a href="#setup">arquivos de setup</a>.
+        </p>
+
+        <br>
+        <h3 id="functionajax">ajax()</h3>
+        <p>
+            A função realiza uma requisição HTTP a um servidor. Tal função espera
+            um parâmetro, um objeto contendo ao menos os parâmetros <b>url</b>, que indica a URL para qual a requisição
+            será feita, e <b>success</b>, uma função anônima usada como callback, que pode receber um parâmetro,
+            o qual contém o retorno dado pelo servidor. Sua chamada é <b>app.ajax({obj})</b>, onde <b>{obj}</b>
+            representa o objeto esperado como parâmetro.
+        </p>
+        <p>
+            Além destes dois atributos principais, existem também outros parâmetros aceitos pela função. São eles:
+            <b>method</b>, que indica o método HTTP utilizado na requisição (GET, POST, PUT, DELETE etc., por padrão
+            utilizando <i>GET</i>), <b>async</b>, que indica se a requisição deve ser assíncrona ou não (booleano,
+            por padrão <i>true</i>), <b>headers</b>, lista de chave/valor que define os headers a serem enviados na
+            requisição, <b>data</b>, que define os dados a serem enviados como parâmetros na requisição,
+            <b>contentType</b>, que espera o MIME type dos dados enviados na requisição, caso se aplique,
+            <b>beforeSend</b>, que espera uma função callback que será executada antes de propriamente enviar a
+            requisição e <b>fail</b>, que espera uma função callback para execução em caso de falha da
+            requisição, a qual também pode esperar um parâmetro, que contém o retorno dado pelo servidor.
+        </p>
+        <p>
+            Veja um exemplo de uso com todos os atributos possíveis:
+        </p>
+        <span class="pregroup">
+			<pre>app.ajax({</pre>
+            <pre>   <b>url</b>: 'server/api/function', <i class="comment">// Essencial. URL destino da requisição</i></pre>
+            <pre>   <b>method</b>: 'post', <i class="comment">// Opcional. Aceita os principais verbos do protocolo HTTP - por padrão, <b>GET</b></i></pre>
+            <pre>   <b>headers</b>: {'Authentication': token}, <i class="comment">// Opcional. Aceita um ou mais headers de requisição HTTP</i></pre>
+            <pre>   <b>data</b>: {'name': 'Jack'}, <i class="comment">// Opcional. Aceita um ou mais dados para enviar na requisição</i></pre>
+            <pre>   <b>contentType</b>: 'application/json; charset=utf-8', <i class="comment">// Opcional. Aceita o MIME type dos dados enviados</i></pre>
+            <pre>   <b>async</b>: true, <i class="comment">// Opcional. True ou false - por padrão, <b>true</b></i></pre>
+            <pre>   <b>beforeSend</b>: function(){ <i class="comment">// Opcional. Função de callback para executar antes do envio da requisição</i></pre>
+            <pre>       // JS code here</pre>
+            <pre>   },</pre>
+            <pre>   <b>success</b>: function(<i>data</i>){ <i class="comment">// Essencial. Função de callback em caso de sucesso</i></pre>
+            <pre>       // JS code here</pre>
+            <pre>   },</pre>
+            <pre>   <b>fail</b>: function(<i>data</i>){ <i class="comment">// Opcional. Função de callback em caso de falha</i></pre>
+            <pre>       // JS code here</pre>
+            <pre>   },</pre>
+			<pre>});</pre>
+		</span>
+
+        <br>
+        <h3 id="functionredirect">redirect()</h3>
+        <p>
+            Realiza um redirecionamento dentro do contexto da Single Page Application, enviando o usuário a uma nova
+            rota e carregando seu conteúdo. A função espera um parâmetro, uma string <b>url</b>, indicando qual a rota
+            à qual o usuário deve ser redirecionado, e é chamada através do comando <b>app.redirect(<i>url</i>)</b>,
+            em que <b>"url"</b> representa o parâmetro esperado.
+        </p>
+        <p>
+            Um simples exemplo de uso desta função:
+        </p>
+        <span class="pregroup">
+			<pre>app.redirect('cliente/1'); <i class="comment">// Define a rota para onde o usuário deve ser redirecionado</i></pre>
+		</span>
+    </div>
+</body>
+</html>
