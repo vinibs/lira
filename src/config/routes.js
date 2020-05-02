@@ -3,25 +3,19 @@ import { route } from '../../js/lira.js'
 
 import '../view/index.js'
 import '../view/errors/not-found.js'
+import '../view/pages/parameter.js'
 import '../components/links.js'
 
-route.set('teste', () => {
-    console.log('acessei o teste')
+route.set('func-route', () => {
+    console.log('This route runs a function')
 
     document.getElementsByTagName('lira-app')[0].innerHTML = `
-        <h2>Teste!</h2>
+        <h2>Function route</h2>
         <app-links></app-links>
     `
 })
 
-route.set('teste/{id}', (params) => {
-    console.log('acessei o teste com parâmetros', params)
-
-    document.getElementsByTagName('lira-app')[0].innerHTML = `
-        <h2>Parâmetros!</h2>
-        <app-links></app-links>
-    `
-})
+route.set('parameterized/{id}', 'param-page')
 
 route.set('/', 'app-index')
 

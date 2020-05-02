@@ -9,7 +9,7 @@ if (!('customElements' in window))
  * Router class, to do the app routing
  */
 class Router {
-    constructor (routeObj) {
+    constructor (routeObj, liraObj) {
         // Listens to the hash change event
         window.addEventListener('hashchange', (ev) => {   
             this.run()
@@ -17,6 +17,8 @@ class Router {
 
         // Sets its Route() object, which contains the route list
         this.routeObj = routeObj
+
+        this.liraObj = liraObj
         this.run()
     }
 
@@ -138,11 +140,13 @@ class Router {
     execRoute (route) {
         const type = typeof route.component
         const params = this.getUrlParams(route)
+        // Sets the route's params in HTTP object
+        http.params = params
 
         switch (type) {
             case 'function':
                 // Try to execute as a usual function (not a class constructor)
-                return route.component(params)
+                return route.component()
 
             case 'string':
                 if (!customElements.get(route.component))
@@ -152,7 +156,7 @@ class Router {
                 let appElement = document.getElementsByTagName('lira-app')
                 if (appElement.length <= 0)
                     throw `Can't find "lira-app" root component`
-                
+
                 return appElement[0].innerHTML = `
                     <${route.component}></${route.component}>
                 `
@@ -218,6 +222,25 @@ class Route {
     }
 }
 
+/**
+ * Class to help with HTTP requests
+ */
+class HTTP {
+    constructor () {
+        this.params = {}
+    }
+
+    // Get params of current HTTP request
+    get params () {
+        return this._params
+    }
+
+    // Set params of current HTTP request
+    set params (newParams) {
+        this._params = newParams
+    }
+}
+
 // Defines the default empty class for <lira-app> component
 class App extends HTMLElement { }
 
@@ -231,7 +254,7 @@ class Lira {
         window.customElements.define('lira-app', App)
         
         // Once app is started, start the router
-        this.router = new Router(route)
+        this.router = new Router(route, this)
     }
 }
 
@@ -240,9 +263,11 @@ class Lira {
  * Instance creations and bootstrapping
  */
 const route = new Route
+const http = new HTTP
+let lira = null
 import('../src/config/routes.js').then(() => {
     // Start the app after importing
-    const lira = new Lira(route)
+    lira = new Lira(route)
 })
 
 // Check if the app is set to use the PWA capabilities
@@ -265,5 +290,6 @@ if (config && ("pwa-enabled" in config) && config['pwa-enabled'] === true) {
  * Exports
  */
 export {
-    route
+    route,
+    http
 }

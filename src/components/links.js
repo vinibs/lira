@@ -6,9 +6,9 @@ class AppLinks extends HTMLElement {
     render () {
         return `
             <a href="#">home</a>
-            <a href="#teste">teste</a>
-            <a href="#teste/123">parâmetros</a>
-            <a href="#josicleisson">non ecziste</a>
+            <a href="#func-route">function route</a>
+            <a href="#parameterized/123">parameters</a>
+            <a href="#notfoundpage">not found</a>
         `
     }
 }
