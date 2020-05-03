@@ -7,8 +7,6 @@ import '../view/pages/parameter.js'
 import '../components/links.js'
 
 route.set('func-route', () => {
-    console.log('This route runs a function')
-
     document.getElementsByTagName('lira-app')[0].innerHTML = `
         <h2>Function route</h2>
         <p>This route receives a JS function istead of a custom element.</p>
