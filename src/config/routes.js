@@ -11,6 +11,8 @@ route.set('func-route', () => {
 
     document.getElementsByTagName('lira-app')[0].innerHTML = `
         <h2>Function route</h2>
+        <p>This route receives a JS function istead of a custom element.</p>
+        <br/>
         <app-links></app-links>
     `
 })

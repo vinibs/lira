@@ -16,6 +16,8 @@ class NotFound extends HTMLElement {
     render () {
         return `
             <h2>Not found</h2>
+            <p>This page doesn't seem to be a part of this app.</p>
+            <br/>
             <a href="#">Back to home</a>
         `
     }
