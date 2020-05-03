@@ -1,17 +1,21 @@
 html {
     font-family: sans-serif;
     text-align: center;
-    font-weight: 200;
 }
 
 a, a:hover, a:visited {
     text-transform: uppercase;
     text-decoration: none;
-    color: rgb(110,10,220)
+    color: rgb(55, 20, 190)
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(135, 130, 230);
 }
 
 h2 {
-    font-weight: 200;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
@@ -32,4 +36,14 @@ app-links {
     max-height: 200px;
     display: block;
     margin: 35px auto;
+}
+
+@media screen and (orientation: portrait) {
+    app-links {
+        flex-direction: column;
+    }
+
+    app-links a {
+        margin: 10px auto
+    }
 }
