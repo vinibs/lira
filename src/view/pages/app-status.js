@@ -3,6 +3,7 @@
  * https://developers.google.com/web/fundamentals/web-components/customelements
  */
 import '../../components/links.js'
+import { http } from '../../../js/lira.js'
 
 // Defines the custom element's class
 class AppStatus extends HTMLElement {
@@ -18,8 +19,9 @@ class AppStatus extends HTMLElement {
         return `
             <h2>App Status</h2>
             Current app status:
-            <div class="not-installed-content">In browser</div>
-            <div class="installed-content">Installed</div>
+            <b style="text-transform: uppercase">
+            ${http.appMode === 'standalone' ? 'Installed' : 'In browser'}
+            </b>
             <br/><br/>
             <app-links></app-links>
         `

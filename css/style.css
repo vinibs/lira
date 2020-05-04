@@ -47,25 +47,3 @@ app-links {
         margin: 10px auto
     }
 }
-
-/* Properties to be shown when the app is running in the browser */
-@media all and (display-mode: browser) {
-    .installed-content {
-        display: none;
-    }
-
-    .not-installed-content {
-        display: block;
-    }
-}
-
-/* Properties to be shown when the app is running in the standalone mode */
-@media all and (display-mode: standalone) {
-    .installed-content {
-        display: block;
-    }
-
-    .not-installed-content {
-        display: none;
-    }
-}

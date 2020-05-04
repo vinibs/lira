@@ -227,7 +227,7 @@ class Route {
  */
 class HTTP {
     constructor () {
-        this.params = {}
+        this._params = {}
     }
 
     // Get params of current HTTP request
@@ -239,6 +239,24 @@ class HTTP {
     set params (newParams) {
         this._params = newParams
     }
+
+    // Get app display-mode on current HTTP request
+    get appMode () {
+        let appMode = null
+        // Checks for the media query that corresponds to the display-mode
+        if (window.matchMedia('(display-mode: browser)').matches)
+            appMode = 'browser'
+        else if (window.matchMedia('(display-mode: standalone)').matches)
+            appMode = 'standalone'
+        else if (window.matchMedia('(display-mode: minimal-ui)').matches)
+            appMode = 'minimal-ui'
+        else if (window.matchMedia('(display-mode: fullscreen)').matches)
+            appMode = 'fullscreen'
+
+        return appMode
+    }
+
+
 }
 
 // Defines the default empty class for <lira-app> component
