@@ -20,6 +20,9 @@ class AppIndex extends HTMLElement {
             
             <h2>Lira Navigation Sample</h2>
             <app-links></app-links>
+            <br/>
+            <br/>
+            <a href="docs/">documentation</a>
         `
     }
 }

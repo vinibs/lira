@@ -269,13 +269,12 @@ class HTTP {
      */
     listenForAppMode (desiredMode, callback) {
         // Get the status of the desired mode
-        let mq = window.matchMedia(`(display-mode: ${desiredMode})`)
-        // Adds a listener to its changes
-        mq.addEventListener('change', (e) => {
-            // If this mode matches the current mode, runs the callback
-            if (e.matches)
-                callback(e)
-        })
+        window.matchMedia(`(display-mode: ${desiredMode})`)
+            .addListener((e) => {
+                // Does the current mode corresponds to the desired one?
+                if (e.matches)
+                    callback(e)
+            })
     }
 
 

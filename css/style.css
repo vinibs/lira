@@ -1,21 +1,21 @@
 html {
     font-family: sans-serif;
     text-align: center;
+    font-weight: lighter;
 }
 
 a, a:hover, a:visited {
     text-transform: uppercase;
     text-decoration: none;
-    color: rgb(55, 20, 190)
+    color: rgb(10, 150, 255)
 }
 
 a:hover {
     text-decoration: underline;
-    text-decoration-color: rgb(135, 130, 230);
 }
 
 h2 {
-    font-weight: 400;
+    font-weight: lighter;
     text-transform: uppercase;
 }
 

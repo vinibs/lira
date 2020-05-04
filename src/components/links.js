@@ -8,7 +8,7 @@ class AppLinks extends HTMLElement {
             <a href="#">home</a>
             <a href="#func-route">function route</a>
             <a href="#parameterized/123">parameters</a>
-            <a href="#app-status">App status</a>
+            <a href="#app-status">app status</a>
             <a href="#notfoundpage">not found</a>
         `
     }
