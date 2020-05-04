@@ -4,6 +4,7 @@ import { route } from '../../js/lira.js'
 import '../view/index.js'
 import '../view/errors/not-found.js'
 import '../view/pages/parameter.js'
+import '../view/pages/app-status.js'
 import '../components/links.js'
 
 route.set('func-route', () => {
@@ -16,6 +17,8 @@ route.set('func-route', () => {
 })
 
 route.set('parameterized/{id}', 'param-page')
+
+route.set('app-status', 'app-status')
 
 route.set('/', 'app-index')
 

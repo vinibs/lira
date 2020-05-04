@@ -3,10 +3,9 @@
  * https://developers.google.com/web/fundamentals/web-components/customelements
  */
 import '../../components/links.js'
-import { http } from '../../../js/lira.js'
 
 // Defines the custom element's class
-class ParamPage extends HTMLElement {
+class AppStatus extends HTMLElement {
 
     // Defines what should be done when the element is attached to the DOM
     connectedCallback () {
@@ -16,21 +15,16 @@ class ParamPage extends HTMLElement {
 
     // Defines the component default inner HTML
     render () {
-        let paramCode = ''
-        for (let i in http.params) {
-            paramCode += `<li>${i}: ${http.params[i]}</li>`
-        }
-
         return `
-            <h2>Parameters</h2>
-            Found parameters in current URL:
-            <ul style="max-width:120px; margin:5px auto 25px; padding:0">
-                ${paramCode}
-            </ul>
+            <h2>App Status</h2>
+            Current app status:
+            <div class="not-installed-content">In browser</div>
+            <div class="installed-content">Installed</div>
+            <br/><br/>
             <app-links></app-links>
         `
     }
 }
 
 // Defines the custom element tag so it can be used in DOM
-window.customElements.define('param-page', ParamPage)
+window.customElements.define('app-status', AppStatus)
