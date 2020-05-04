@@ -230,17 +230,26 @@ class HTTP {
         this._params = {}
     }
 
-    // Get params of current HTTP request
+    /**
+     * Gets params of current HTTP request
+     * @returns {object}
+     */
     get params () {
         return this._params
     }
 
-    // Set params of current HTTP request
+    /**
+     * Set params of current HTTP request
+     * @param {object} newParams
+     */
     set params (newParams) {
         this._params = newParams
     }
 
-    // Get app display-mode on current HTTP request
+    /**
+     * Get app display-mode on current HTTP request
+     * @returns {string}
+     */
     get appMode () {
         const modes = ['browser', 'standalone', 'minimal-ui', 'fullscreen']
 
@@ -251,6 +260,22 @@ class HTTP {
         }
         
         return null
+    }
+
+    /**
+     * Identifies when the display-mode has changed to a specific mode
+     * @param {string} desiredMode 
+     * @param {function} callback 
+     */
+    listenForAppMode (desiredMode, callback) {
+        // Get the status of the desired mode
+        let mq = window.matchMedia(`(display-mode: ${desiredMode})`)
+        // Adds a listener to its changes
+        mq.addEventListener('change', (e) => {
+            // If this mode matches the current mode, runs the callback
+            if (e.matches)
+                callback(e)
+        })
     }
 
 

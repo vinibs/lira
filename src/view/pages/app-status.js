@@ -9,6 +9,11 @@ import { http } from '../../../js/lira.js'
 class AppStatus extends HTMLElement {
     constructor () {
         super()
+
+        http.listenForAppMode('standalone', (e) => {
+            // Re-renders if the media query changes
+            this.innerHTML = this.render()
+        })
     }
 
     // Defines what should be done when the element is attached to the DOM
