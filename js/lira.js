@@ -31,8 +31,8 @@ class Router {
         let notFoundRoute = null        
         
         // Check for a route that corresponds to current page
-        for (const i in this.routeObj.routes) {
-            let route = this.formatPath(this.routeObj.routes[i])
+        for (const i in this.routeObj._routes) {
+            let route = this.formatPath(this.routeObj._routes[i])
 
             // Check if the route corresponds to URL
             if (route.path === path) {
@@ -46,8 +46,8 @@ class Router {
         }
 
         // Check for a route with params for the current page
-        for (const i in this.routeObj.routes) {
-            let route = this.formatPath(this.routeObj.routes[i])
+        for (const i in this.routeObj._routes) {
+            let route = this.formatPath(this.routeObj._routes[i])
 
             // Test the syntax with regex
             let regex = `^${route.path.replace('*', '\\*')}$`
@@ -200,7 +200,7 @@ class Router {
  */
 class Route {
     constructor () {
-        this.routes = []
+        this._routes = []
     }
 
     /**
@@ -218,7 +218,7 @@ class Route {
             throw `Component attribute must be a string or a function`
 
         // Adds the route to the list
-        this.routes.push({ path, component })
+        this._routes.push({ path, component })
     }
 }
 
