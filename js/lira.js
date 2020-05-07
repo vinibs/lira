@@ -268,6 +268,12 @@ class HTTP {
      * @param {function} callback 
      */
     listenForAppMode (desiredMode, callback) {
+        if (typeof desiredMode !== 'string')
+            throw `App mode needs to be a string`
+
+        if (typeof callback !== 'function')
+            throw `Listener's callback needs to be a function`
+
         // Get the status of the desired mode
         window.matchMedia(`(display-mode: ${desiredMode})`)
             .addListener((e) => {
