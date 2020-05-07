@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Documentation</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Vinicius Baroni Soares">
+    <meta name="viewport" 
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="docstyle.css">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <div id="sidebar">
+        <a href="#"><h3>Start</h3></a>
+        <a href="#installingandupdating"><h3>Installing and updating</h3></a>
+        <a href="#structure"><h3>Structure</h3></a>
+        <a href="#basicoperation"><h3>Basic operation</h3></a>
+        <a href="#initialsetup"><h3>Initial setup</h3></a>
+        <ul class="nolist">
+            <a href="#notusingpwa"><li>Not using PWA</li></a>
+        </ul>
+        <a href="#modules"><h3>Modules</h3></a>
+        <ul class="nolist">
+            <a href="#routemodule"><li>Route module</li></a>
+            <ul class="nolist">
+                <a href="#routesetmethod"><li>Method: set()</li></a>
+            </ul>
+            <a href="#httpmodule"><li>HTTP module</li></a>
+            <ul class="nolist">
+                <a href="#httpparamsprop"><li>Property: params</li></a>
+                <a href="#httpappmodeprop"><li>Property: appMode</li></a>
+                <a href="#httplistenforappmodemethod"><li>
+                    Method: listenForAppMode()
+                </li></a>
+            </ul>
+        </ul>
+        <a href="#routes"><h3>Routes</h3></a>
+        <ul class="nolist">
+            <a href="#routedefinition"><li>Route definition</li></a>
+            <a href="#paramroute"><li>Param route</li></a>
+        </ul>
+        <a href="#components"><h3>Components</h3></a>
+    </div>
+
+    <div id="content">
+        <span class="maintitle">
+            <span alt="Logo" id="logo">Lira</span>
+
+            <h3>Simplicity and organization.</h3>
+        </span>
+
+        <h4>
+            <a href="https://github.com/vinibs/lira" target="_blank" 
+                class="textcenter">
+                GitHub
+            </a>
+        </h4>
+
+        <br/>
+
+
+        <h2 id="installingandupdating">Installing and updating</h2>
+        <p>
+            Lira can be downloaded from its 
+            <a href="https://github.com/vinibs/lira" target="_blank">
+            GitHub page</a>, cloning the project or getting a 
+            <b>.zip</b> file with all its structure.
+        </p>
+        <p>
+            To install and run it, just put the project files in the
+            root directory of your web server.
+        </p>
+        <br/>
+        <p>
+            To update the framework, the simplest way to do this is
+            downloading and replacing the <b>js/lira.js</b> file on
+            your server.
+        </p>
+        <p>
+            However, you should be aware if the new version doesn't 
+            change the project's 
+            <a href="#basicstructure">basic structure</a>. The current
+            version, for example, isn't compatible with v1.0 of Lira,
+            as it was completely rewritten using a different approach.
+        </p>
+
+
+        <br/><br/>
+
+        <h2 id="structure">Structure</h2>
+        <p>
+            Lira's structure isn't too big or too complex. 
+            Nevertheless, some files must be in the correct directory
+            in order to get everything running correctly.
+            The minimum file structure needed to run it is as follows:
+        </p>
+
+        <span class="dirtree">
+            <ul>
+                <li>
+                    /
+                    <i class="grayfont" style="font-weight: lighter;">
+                        (app root)
+                    </i>
+                </li>
+                <ul>
+                    <li>
+                        js
+                    </li>
+                    <ul>
+                        <li class="treefile">lira.js</li>
+                    </ul>
+
+                    <li>
+                        src
+                    </li>
+                    <ul>
+                        <li>
+                            config
+                        </li>
+                        <ul>
+                            <li class="treefile">config.js</li>
+                            <li class="treefile">routes.js</li>
+                        </ul>
+                    </ul>
+
+                    <li class="treefile">
+                        index.html
+                    </li>
+                    <li class="treefile">
+                        <i>manifest.json</i>
+                        <i class="comment">
+                            &nbsp;// Only needed if using PWA
+                        </i>
+                    </li>
+                    <li class="treefile">
+                        robots.txt
+                    </li>
+                    <li class="treefile">
+                        <i>service_worker.json</i>
+                        <i class="comment">
+                            &nbsp;// Only needed if using PWA
+                        </i>
+                    </li>
+                </ul>
+            </ul>
+        </span>
+
+        <p>
+            Although the minimum files needed to run the framework are few,
+            the default download comes with some other files that may serve
+            as examples of its inner components' organization.
+        </p>
+        <p>
+            Some recommendations about the structure are to always use
+            the <b>/src</b> directory to store your web components and
+            to separate reusable components (in a directory like
+            <b>/src/components</b>) from the pages' main files (in a 
+            folder like <b>/src/view</b>). The
+            <a href="https://github.com/vinibs/lira" target="_blank">
+            project's repository</a> shows a structure that is based
+            on these recomendations.
+        </p>
+
+
+        <br/><br/>
+
+        <h2 id="basicoperation">Basic operation</h2>
+        <p>
+            Lira has a relatively simple operation, based on Google's
+            documentation for <a target="_blank" href=
+            "https://developers.google.com/web/fundamentals/web-components/customelements">
+            web components custom elements</a>. Each component file is 
+            also the responsible to initialize itself so its custom tag
+            becomes available to be attached to the DOM. Therefore, the
+            file just need to be imported by a currently running script.
+        </p>
+        <p>
+            Different from the last version, which used the concept of
+            "lazy loading" to get pages' data, the current version loads
+            the contents of all files used in the website or application at
+            once, so the first page load is slower than the next ones, but
+            the access to the contents of the other pages is faster than
+            loading each one every time it's needed. This also allows the
+            entire app to be cached by the browser so it doesn't need to
+            download all its contents every time a user accesses the 
+            application. 
+        </p>
+        <p>
+            This version also brings support for <b>PWAs</b> 
+            (Progressive Web Apps), as <a target="_blank"
+            href="https://web.dev/progressive-web-apps/">documented 
+            here</a>, by default. That means that a new Lira app is
+            also a basic PWA without extra efforts. This configuration,
+            on the other hand, is optional and a Lira app can also be
+            just a website, without prompting users for installation on
+            their phones or desktops, with few steps to get there.
+        </p>
+        <p>
+            To put all these concepts together, Lira uses its route 
+            definition file (<b>routes.js</b>) as a "glue" of the 
+            main components, the basic HTML and its routing system.
+            The <a href="#routes">routes</a> section brings more 
+            information about using this part of Lira.
+        </p>
+        <p>
+            Its routing system also uses a slash to isolate the hash
+            character in the URL, so when a path like 
+            <b><i>yourapp/#users</i></b> is accessed, it is automatically 
+            changed to <b><i>yourapp/#/users</i></b>. Lira does this 
+            to make it more readable and handles the current URL so 
+            the routes doesn't need to specify the slash separator.
+        </p>
+
+
+        <br/><br/>
+
+        <h2 id="initialsetup">Initial setup</h2>
+        <p>
+            This Lira version was made thinking in reduce the initial setup
+            needed for running the framework, so it doesn't require a first
+            configuration to be ready. This is thanks to the use of the hash
+            based <a href="#routes">routing</a>.
+        </p>
+        <p>
+            With this new format, Lira should work in any web server without
+            needing too many adjusts like redirecting all requests to the
+            same HTML file.
+        </p>
+        <p>
+            Currently, there is a configuration file (<b>config/config.js</b>)
+            that stores a JSON with configurable properties. However, its current 
+            only property tells about using Lira to work as a PWA as described 
+            below in the <a href="#notusingpwa">not using PWA</a> section.
+        </p>
+
+        <br/>
+
+        <h3 id="notusingpwa">Not using PWA</h3>
+        <p>
+            Now, by default, Lira comes configured to behave as a <b>Progressive
+            Web App (PWA)</b>. This means that an website or webapp built with 
+            Lira <a href="https://web.dev/progressive-web-apps/" 
+            target="_blank">can also be installed</a> on smartphones and desktops.
+        </p>
+        <p>
+            However, this is optional and to use Lira without the PWA resources
+            there are a few things that need to be done:
+            <ul>
+                <li>Delete the <b>manifest.json</b> file,</li>
+                <li>
+                    Set the <b>pwa-enabled</b> entry of the 
+                    <b>config/config.js</b> file to <i>false</i> (this will stop
+                    Lira from trying to load the <i>service_worker.js</i> file),
+                </li>
+                <li>Delete the <b>service_worker.js</b> file,</li>
+                <li>
+                    Delete the <b>images/icons</b> directory (if it already 
+                    exists in your project),
+                </li>
+                <li>
+                    Remove the references to the manifest's and the icons' files
+                    from the <b>index.html</b> file.
+                </li>
+            </ul>
+            After these steps, yout Lira website should behave as just a browser's
+            web app, not as a PWA anymore.
+        </p>
+        <p>
+            And, if you want to get the PWA behavior back, just restore the files
+            and files' references and set the config property again to <i>true</i>. 
+            Basically, undo the list above.
+        </p>
+
+
+        <br/><br/>
+
+        <h2 id="modules">Modules</h2>
+        <p>
+            To give freedom to the developer and try to make some things a
+            little easier, Lira offers a few modules that integrate its 
+            inner components.
+        </p>
+
+        <br/>
+
+        <h3 id="routemodule">Route module</h3>
+        <p>
+            The route module is an instance of Lira's Route class. It 
+            currently offers only the <b>set()</b> method, which should 
+            be used to define an app route.
+        </p>
+        <p>
+            To import this module, use the default JS <b>import</b>
+            syntax, referencing the <b>lira.js</b> file.
+        </p>
+
+        <div class="pregroup">
+            <pre><i class="comment">Importing the <b>route</b> module</i></pre>
+            <pre>import { <b>route</b> } from <b>'../../js/lira.js'</b></pre>
+        </div>
+
+
+        <h4 id="routesetmethod">Method: set()</h4>
+        <p>
+            As documented in the <a href="#routes">routes section</a>,
+            the set() method expects two parameters: a <b>string as
+            the route path</b> and a <b>string or a function as the
+            component to be called</b> when the route path is achieved
+            by a user.
+        </p>
+
+        <br/>
+
+        <h3 id="httpmodule">HTTP module</h3>
+        <p>
+            To help handling some properties of the requests made to the
+            website or app, Lira has a little HTTP module. It currently
+            has two properties and one method available.
+        </p>
+
+        <div class="pregroup">
+            <pre><i class="comment">Importing the <b>http</b> module</i></pre>
+            <pre>import { <b>http</b> } from <b>'../../js/lira.js'</b></pre>
+        </div>
+
+        <h4 id="httpparamsprop">Property: params</h4>
+        <p>
+            Lira's HTTP module stores the parameters obtained when the app
+            receives a request to a URL that uses a 
+            <a href="#paramroute">param route</a>. This attribute is set 
+            automatically and can be accessed directly, but it can also be 
+            overridden.
+        </p>
+        
+        <div class="pregroup">
+            <pre>let params = http.params <i class="comment"
+                >// Gets the current request's parameters</i></pre>
+            <pre>http.params = { "id": 12 } <i class="comment"
+                >// Sets the value of HTTP's params to a new object</i></pre>
+        </div>
+
+        <h4 id="httpappmodeprop">Property: appMode</h4>
+        <p>
+            This property gets the current mode the app is running. Its value
+            can be <b>browser</b>, <b>standalone</b>, <b>minimal-ui</b> or
+            <b>fullscreen</b>. This value is set using the <b>CSS media 
+            attribute</b> to inform how the app is being accessed currently.
+        </p>
+        <p>
+            When the website or application is accessed through the browser,
+            the property will return the value "browser". If the browser is
+            running in full screen mode, it can return "fullscreen". This
+            value also can be returned if the user install the PWA and it is
+            configured to open in full screen.
+        </p>
+        <p>
+            As the full screen mode, if the PWA is installed, depending on its
+            configuration, this property can return "standalone" when the app 
+            is running on its own window, or "minimal-ui" if running in its own
+            window with a few navigation buttons on its UI.
+        </p>
+
+        <div class="pregroup">
+            <pre>let currentMode = http.appMode <i class="comment"
+                >// Gets the mode used by the user to access the app</i></pre>
+        </div>
+
+        <h4 id="httplistenforappmodemethod">Method: listenForAppMode()</h4>
+        <p>
+            Sometimes is needed to make the app listen to changes in the mode
+            its been viewed (like when the user just installed it on a desktop
+            browser). To help with this, there is the listenForAppMode method.
+        </p>
+        <p>
+            It receives a <b>string as the first parameter</b>, which defines
+            the app mode needs to be listened. The second parameter this method
+            receives is <b>the callback function</b> to be executed when the 
+            desired app mode is used to view the page.
+        </p>
+        <p>
+            This method adds a listener for the change of the app mode 
+            property (the <b>CSS display-mode property</b>) and runs the
+            callback when the property changes to the desired value. This 
+            method always passes the <b>event</b> parameter to the callback.
+        </p>
+
+        <div class="pregroup">
+            <pre><b>http.listenForAppMode</b>('standalone', (e) => {</pre>
+            <pre>   this.innerHTML = this.render()  <i class="comment"
+                >// Re-renders when appMode changes to 'standalone'</i></pre>
+            <pre>})</pre>
+        </div>
+
+
+        <br/><br/>
+
+        <h2 id="routes">Routes</h2>
+        <p>
+            The heart of Lira is its routing system, that now uses the hash
+            based routing instead of using the location API it used in the
+            first version.
+        </p>
+        <p>
+            Although this mechanism doesn't give as beautiful result as does
+            the location API, separating the resources from the website domain
+            with a hash (#) currently gives the best isolation between the
+            server configurations and the front-end.
+        </p>
+
+        <br/>
+
+        <h3 id="routedefinition">Route definition</h3>
+        <p>
+            Routes can be defined importing the <b>route</b> module. It is an
+            object, a class instance, exported by the <b>js/lira.js</b> file 
+            and has a <i><b>set()</b></i> method, which should be used to 
+            declare routes within Lira.
+        </p>
+        <p>
+            This <b>route.set()</b> method expects 2 parameters: the route 
+            <u>path</u> and the <u>component</u> that will be rendered when the
+            given path is accessed by the users.
+        </p>
+        <p>
+            When defining a route to a custom element, <b>the routes.js file
+            must contain the imports of those components that will be used
+            by a route</b>. These imports must be in de beginning of the file 
+            in order to work correctly and the imports need to refer the whole 
+            JS component's file (not like importing an exported module) and must 
+            include its file extension.
+        </p>
+
+        <span class="pregroup">
+            <pre><b class="comment">File <i>src/config/route.js</i></b></pre>
+            <pre>import { <b>route</b> } from <b>'../../js/lira.js'</b></pre>
+            <pre>import <b>'../view/app-index.js'</b> <i class="comment"
+                >// Imports the file that defines &lt;app-index&gt;, with the <b
+                >.js</b> file extension</i></pre>
+                <pre>import <b>'../view/not-found.js'</b> <i class="comment"
+                    >// Imports the file that defines &lt;not-found&gt;</i></pre>
+            <pre></pre>
+            <pre><b>route.set</b>('/', '<b>app-index</b>') <i class="comment"
+                >// String for a custom element tag, for the root path</i></pre>
+            <pre><b>route.set</b>('foo', () => { <i class="comment"
+                >// Route that runs a function, for the "foo" path</i></pre>
+            <pre>   <i>console.log</i>('Foo route!')</pre>
+            <pre>})</pre>
+            <pre><b>route.set</b>('*', '<b>not-found</b>') <i class="comment"
+                >// Route for any path that doesn't fit the above rules</i></pre>
+        </span>
+
+        <p>
+            The <b>path</b> param is a string that defines the right part of
+            the hash in URL that users will access. This path can be a string
+            that needs to correspond <b>exactly</b> to the accessed URL, a 
+            string that indicates a <b>parameterized resource</b>, as can be 
+            seen in the <a href="#paramroute">param route</a> section, or a 
+            <b>wildcard</b> character to receive all routes that doesn't fit 
+            any of the other defined rules. The route's path may start with 
+            or without a slash.
+        </p>
+
+        <span class="pregroup">
+            <pre><b class="comment"
+                >Valid path examples (without quotes)</b></pre>
+            <pre>"/"</pre>
+            <pre>"/users"</pre>
+            <pre>"users/{id}" <i 
+            class="comment">// Receives a parameter called "id"</i></pre>
+            <pre>"administration/dashboards"</pre>
+            <pre>"*" <i class="comment">// Wildcard character</i></pre>
+        </span>
+        
+        <p>
+            The <b>component</b> param is a string that defines the name of
+            the custom element's tag to be used for the path or a function 
+            that should execute when the URL is reached. If the component
+            is a function, nothing will be rendered on the browser unless the
+            component tells the browser to do this, as calling some 
+            <i>element.innerHTML = {content}</i> inside the function.
+        </p>
+        <p>
+            Its important to keep in mind that to define a route to a custom
+            element component, its JS file needs to be imported before setting
+            the route to it, so the browser knows <i>"who is this custom 
+            tag"</i>.
+        </p>
+        
+        <span class="pregroup">
+            <pre><b class="comment"
+                >Valid component examples (without quotes)</b></pre>
+            <pre>"app-index" <i class="comment"
+                >// Means the tag &lt;app-index&gt;&lt;/app-index&gt;</i></pre>
+            <pre>() => { ... } <i class="comment">// An arrow function</i></pre>
+            <pre>function () { ... } <i class="comment"
+                >// A traditional function</i></pre>
+
+            <pre></pre>
+
+            <pre><b class="comment"
+                >Invalid component examples (without quotes)</b></pre>
+            <pre>"div" <i class="comment">// A default HTML tag</i></pre>
+            <pre>"foobar" <i class="comment">// A name without hyphen</i></pre>
+            <pre>class UsersPage { ... } <i class="comment">// A class</i></pre>
+        </span>
+        
+        <p class="obs">
+            <b>Note:</b> keep in mind that the <b>path</b> parameter, when
+            defines with an empty string (<b>""</b>), means the same as being
+            set to the application root path (<b>"/"</b>). Both params are
+            needed to define a route.
+        </p>
+
+        <br/>
+
+        <h3 id="paramroute">Param route</h3>
+        <p>
+            Lira also supports parameterized routes. This means that users
+            can pass values for the application directly within the route.
+            With this, a route defined with a parameter, let's call it "id",
+            can receive any value in the "id" position of the URL and use it
+            inside the rendered component.
+        </p>
+        <p>
+            The parameter is set using the syntax <b>{param_name}</b> inside
+            the route path string, while setting a route, where 
+            <b>"param_name"</b> means the key that will be given to the 
+            value that come from the URL, in a key-value pair.
+        </p>
+
+        <div class="pregroup">
+            <pre><b class="comment"
+                >Given the URL: <i>yourapp.com/#/user/7</i></b></pre>
+            <pre><b>route.set(</b>'user/{id}', 'user-page')</pre>
+            <pre><i class="comment"
+                >Will result in { "id" : 7 }</i></pre>
+        </div>
+
+        <p>
+            But how to get the route's parameter value? Getting the
+            <b>params</b> attribute from Lira's 
+            <a href="#httpmodule">HTTP module instance</a>. So, 
+            continuing the example above, for tha same URL, the component 
+            needs to do as follows:
+        </p>
+
+        <div class="pregroup">
+            <pre><b class="comment"
+                >Given the URL: <i>yourapp.com/#/user/7</i></b></pre>
+            <pre><b class="comment"
+                >And the route path: <i>user/{id}</i></b></pre>
+            <pre>import { <b>http</b> } from <b>'../../../js/lira.js'</b></pre>
+            <pre></pre>
+            <pre>class CustomElement <i>extends HTMLElement</i> {</pre>
+            <pre>   someMethod () {</pre>
+            <pre>       let pageParams = <b>http.params</b></pre>
+            <pre>       <i class="comment"
+                            >So the <b>pageParams</b> variable receives: <b
+                            >{ "id" : 7 }</b></i></pre>
+            <pre>   }</pre>
+            <pre>}</pre>
+            <pre></pre>
+        </div>
+
+        <br/><br/>
+
+        <h2 id="components">Components</h2>
+        <p>
+            Lira's components use the <a target="_blank" href=
+            "https://developers.google.com/web/fundamentals/web-components/customelements">web component's custom elements standard</a>,
+            so a component is <b>a JS class that extends HTMLElement</b> 
+            (or other, more specific, HTML element) and defines a custom
+            HTML tag, whose name must contain a hyphen.
+        </p>
+        <p>
+            By default, components have a <b>render()</b> method (to be 
+            a little similar to React), but they doesn't need to. All the
+            component's life cycle is defined within the own class. Anyway,
+            having a method that just returns the element's inner HTML could
+            be helpful to organize things.
+        </p>
+        <p>
+            As documented by Google, custom elements have their own life
+            cycle methods, and they are also useful in Lira. So, using
+            the constructor to initialize properties of the component or
+            using the <b>connectedCallback()</b> method to set its inner
+            content when it is attached to de DOM are also helpful.
+        </p>
+        <p>
+            However, Lira has two specificities whem the matter is its
+            components: <b>the classes' files must declare its own
+            custom HTML tags</b> and <b>every class that uses another
+            component's custom tag should import it by itself</b>. 
+        </p>
+        <p>
+            This means that a component's file has its class, its custom 
+            tag definition and the imports to every other component that
+            is used by its HTML. Because of that, its needed to import
+            all the file (which already runs the custom tag definition),
+            instead of importing an exported component from the file.
+        </p>
+        <p>
+            To define a component, an order must be follow in order to 
+            everything work as espected: first, de file need to run 
+            <b>all its imports</b>. Then, the <b>component's class</b> must 
+            be defined. At last, at the end of the file, outside the class
+            or any function, the <b>element's custom tag</b> must be defined.
+        </p>
+
+        <div class="pregroup">
+            <pre><b class="comment">Example of HomePage's component file</b></pre>
+            <pre>import '../components/main-menu.js' <i class="comment"
+                >// Imports the whole file (with the <b>.js</b> extension</i></pre>
+            <pre></pre>
+            <pre>class HomePage <i>extends HTMLElement</i> { <i class="comment"
+                >// Defines the class, extending HTMLElement</i></pre>
+            <pre>   ... </pre>
+            <pre>}</pre>
+            <pre></pre>
+            <pre>window.customElements.define('home-page', HomePage) <i 
+                class="comment">// Defines the component's custom tag</i></pre>
+        </div>
+
+        <p>
+            This order is simple to understand: the custom tag definition
+            expects the class to already be known, and the class expects
+            the other components it uses to be known as well. So, first
+            things first in component creation.
+        </p>
+    </div>
+</body>
+</html>
