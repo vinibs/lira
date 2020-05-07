@@ -51,6 +51,9 @@ p {
     text-align: justify;
 }
 
+#sidebar-toggle {
+    display: none;
+}
 
 #sidebar {
     display: block;
@@ -65,7 +68,7 @@ p {
     left: 20px;
     font-size: 11pt;
     font-weight: lighter;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: 0.3s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -80,7 +83,7 @@ p {
     color: rgb(200,200,200);
 }
 #sidebar a:hover {
-    background: rgb(90,90,90);
+    background: rgb(70,70,70);
     transition: 0.3s;
 }
 
@@ -145,9 +148,7 @@ p {
     height: 20px;
     margin: 0;
 }
-.pregroup pre:nth-child(even) {
-    background-color: rgba(0,0,0,0.02)
-}
+
 .pregroup.inlinepre {
     width: 47%;
     display: inline-block;
@@ -195,6 +196,7 @@ p {
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
 }
 .dirtree ul {
+    display: inline-block;
     padding-left: 25px;
     font-weight: bolder;
     margin-bottom: 10px;
@@ -216,7 +218,6 @@ p {
 }
 
 
-
 .obs {
     background: rgba(140,190,255,0.1);
     padding: 10px 15px;
@@ -229,8 +230,33 @@ p {
 
 
 @media (max-width: 700px) {
+    #sidebar-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgb(110,110,110);
+        border-radius: 100%;
+        z-index: 11;
+        background: rgb(40,40,40) url(images/menu.svg) no-repeat center center;
+        background-size: 25px 25px;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    #sidebar-toggle.close {
+        background-image: url(images/close.svg);
+    }
+
     #sidebar {
+        z-index: 10;
         display: none;
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
     }
 
     #content {
