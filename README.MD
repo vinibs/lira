@@ -7,7 +7,7 @@ Lira is a JavaScript microframework for building Single Page Applications (SPAs)
 
 It uses the default JavaScript implementation that run in most browsers, in order to allow develpers to use it with any server, with no compilation or complex processes.
 
-Tha framework's basic structure is a SPA router that act linking hash based routes with custom elements components, keeping the default JavaScript syntax and code structure.
+Tha framework's basic structure is a SPA router that acts linking hash based routes with custom elements components, keeping the default JavaScript syntax and code structure.
 
 ## Documentation
 
