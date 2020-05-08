@@ -1,0 +1,49 @@
+html {
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: lighter;
+}
+
+a, a:hover, a:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(5, 110, 190)
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+app-links {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+
+#logo {
+    width: 50%;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin: 35px auto;
+}
+
+@media screen and (orientation: portrait) {
+    app-links {
+        flex-direction: column;
+    }
+
+    app-links a {
+        margin: 10px auto
+    }
+}

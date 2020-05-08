@@ -9,13 +9,13 @@ body {
 }
 
 a, a:visited, a:hover, a:active {
-    color: rgb(10, 150, 255);
+    color: rgb(5, 110, 190);
 }
 
 #logo{
     display: block;
     height: 190px;
-    background: url(img/lira.png) no-repeat center center;
+    background: url(images/lira.png) no-repeat center center;
     background-size: 200px auto;
     margin: 30px auto;
     color: transparent;
@@ -27,8 +27,12 @@ a, a:visited, a:hover, a:active {
     text-align: center;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     font-weight: 100;
+}
+
+h4 {
+    font-weight: 400;
 }
 
 #sidebar a, #sidebar a:visited, .nolist a, .nolist a:visited, a h2, a h3,
@@ -37,7 +41,7 @@ h1, h2, h3, h4 {
 }
 
 pre {
-    font-size: 130%;
+    font-size: 110%;
     padding: 5px 10px 5px 25px;
     margin: 25px auto;
 }
@@ -47,6 +51,9 @@ p {
     text-align: justify;
 }
 
+#sidebar-toggle {
+    display: none;
+}
 
 #sidebar {
     display: block;
@@ -61,7 +68,7 @@ p {
     left: 20px;
     font-size: 11pt;
     font-weight: lighter;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: 0.3s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -76,8 +83,16 @@ p {
     color: rgb(200,200,200);
 }
 #sidebar a:hover {
-    background: rgb(90,90,90);
+    background: rgb(70,70,70);
     transition: 0.3s;
+}
+
+#sidebar .nolist {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#sidebar .nolist .nolist li {
+    color: rgb(170,170,170);
 }
 
 #content {
@@ -119,14 +134,21 @@ p {
     background: rgb(245,245,245);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     display: block;
-    margin: 25px auto;
+    margin: 25px auto 60px;
+    padding-top: 5px;
     overflow-x: auto;
     border-radius: 3px;
     text-align: left;
 }
 .pregroup pre {
+    display: inline-block;
+    min-width: 100%;
+    padding: 5px 25px;
+    line-height: 130%;
+    height: 20px;
     margin: 0;
 }
+
 .pregroup.inlinepre {
     width: 47%;
     display: inline-block;
@@ -162,7 +184,7 @@ p {
 
 
 .dirtree {
-    background: rgb(250,250,250);
+    background: rgb(252,252,252);
     margin: 30px auto;
     padding: 5px;
     display: block;
@@ -171,13 +193,18 @@ p {
     width: 95%;
     max-width: 650px;
     border-radius: 5px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
 }
 .dirtree ul {
+    display: inline-block;
     padding-left: 25px;
     font-weight: bolder;
     margin-bottom: 10px;
     list-style: none;
+    border-left: 1px solid rgb(235,235,235);
+}
+.dirtree ul:first-child {
+    border: none;
 }
 .dirtree ul li {
     margin-right: 10px;
@@ -189,7 +216,6 @@ p {
     list-style: none;
     font-weight: normal;
 }
-
 
 
 .obs {
@@ -204,8 +230,33 @@ p {
 
 
 @media (max-width: 700px) {
+    #sidebar-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgb(110,110,110);
+        border-radius: 100%;
+        z-index: 11;
+        background: rgb(40,40,40) url(images/menu.svg) no-repeat center center;
+        background-size: 25px 25px;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    #sidebar-toggle.close {
+        background-image: url(images/close.svg);
+    }
+
     #sidebar {
+        z-index: 10;
         display: none;
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
     }
 
     #content {
