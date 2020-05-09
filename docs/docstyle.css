@@ -244,6 +244,7 @@ p {
         background-size: 25px 25px;
         user-select: none;
         -webkit-user-select: none;
+        cursor: pointer;
     }
     #sidebar-toggle.close {
         background-image: url(images/close.svg);
