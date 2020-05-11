@@ -1,3 +1,8 @@
+/**
+ * @author Vinicius Baroni Soares
+ * @version 1.0.0
+ */
+
 import config from '../src/config/config.js'
 
 // Checks if the browser supports Custom Elements v1
@@ -7,9 +12,14 @@ if (!('customElements' in window))
 
 /**
  * Router class, to do the app routing
+ * @class Router
  */
 class Router {
-    constructor (routeObj, liraObj) {
+    /**
+     * @constructor
+     * @param {object} routeObj
+     */
+    constructor (routeObj) {
         // Listens to the hash change event
         window.addEventListener('hashchange', (ev) => {   
             this.run()
@@ -17,8 +27,6 @@ class Router {
 
         // Sets its Route() object, which contains the route list
         this.routeObj = routeObj
-
-        this.liraObj = liraObj
         this.run()
     }
 
@@ -197,9 +205,14 @@ class Router {
 
 /**
  * Route class, to set routes
+ * @class Route
  */
 class Route {
+    /**
+     * @constructor
+     */
     constructor () {
+        /** @private */
         this._routes = []
     }
 
@@ -224,9 +237,14 @@ class Route {
 
 /**
  * Class to help with HTTP requests
+ * @class HTTP
  */
 class HTTP {
+    /**
+     * @constructor
+     */
     constructor () {
+        /** @private */
         this._params = {}
     }
 
@@ -287,19 +305,26 @@ class HTTP {
 }
 
 // Defines the default empty class for <lira-app> component
+/** @class App */
 class App extends HTMLElement { }
 
 
 /**
  * Main class
+ * @class Lira
  */
 class Lira {
+    /**
+     * @constructor
+     * @param {object} route 
+     */
     constructor (route) {
         // Defines the custom element tag so it can be used in DOM
         window.customElements.define('lira-app', App)
         
         // Once app is started, start the router
-        this.router = new Router(route, this)
+        /** @private */
+        this.router = new Router(route)
     }
 }
 
@@ -333,6 +358,8 @@ if (config && ("pwa-enabled" in config) && config['pwa-enabled'] === true) {
 
 /**
  * Exports
+ * @exports route
+ * @exports http
  */
 export {
     route,
