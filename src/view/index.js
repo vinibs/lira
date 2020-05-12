@@ -16,7 +16,7 @@ class AppIndex extends HTMLElement {
     // Defines the component default inner HTML
     render () {
         return `
-            <img src="./images/logo.png" id="logo" alt="Lira">
+            <img src="./images/logo.png" class="logo" alt="Lira">
             
             <h2>Navigation Sample</h2>
             <app-links></app-links>

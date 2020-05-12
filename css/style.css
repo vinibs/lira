@@ -1,13 +1,13 @@
 html {
     font-family: sans-serif;
-    text-align: center;
     font-weight: lighter;
+    text-align: center;
 }
 
 a, a:hover, a:visited {
-    text-transform: uppercase;
+    color: rgb(5, 110, 190);
     text-decoration: none;
-    color: rgb(5, 110, 190)
+    text-transform: uppercase;
 }
 
 a:hover {
@@ -20,22 +20,22 @@ h2 {
 }
 
 app-links {
-    width: 90%;
-    max-width: 600px;
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: 0 auto;
+    max-width: 600px;
+    width: 90%;
 }
 
 
-#logo {
-    width: 50%;
-    height: auto;
-    max-width: 200px;
-    max-height: 200px;
+.logo {
     display: block;
+    height: auto;
     margin: 35px auto;
+    max-height: 200px;
+    max-width: 200px;
+    width: 50%;
 }
 
 @media screen and (orientation: portrait) {

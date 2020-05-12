@@ -1,11 +1,11 @@
 html, body {
-    height: 100%;
+    height: 100vh;
 }
 
 body {
     font-family: sans-serif;
-    line-height: 165%;
     font-weight: 100;
+    line-height: 165%;
 }
 
 a, a:visited, a:hover, a:active {
@@ -13,18 +13,18 @@ a, a:visited, a:hover, a:active {
 }
 
 #logo{
-    display: block;
-    height: 190px;
     background: url(images/lira.png) no-repeat center center;
     background-size: 200px auto;
-    margin: 30px auto;
     color: transparent;
+    display: block;
+    height: 190px;
+    margin: 30px auto;
 }
 
 .maintitle h2 {
     color: rgb(160,160,160);
-    text-transform: uppercase;
     text-align: center;
+    text-transform: uppercase;
 }
 
 h1, h2, h3 {
@@ -42,8 +42,8 @@ h4 {
 
 pre {
     font-size: 110%;
-    padding: 5px 10px 5px 25px;
     margin: 25px auto;
+    padding: 5px 10px 5px 25px;
 }
 
 
@@ -56,31 +56,31 @@ p {
 }
 
 #sidebar {
-    display: block;
-    position: fixed;
     background: rgb(40,40,40);
-    width: 240px;
-    min-height: 90%;
-    height: calc(100% - 60px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    top: 30px;
-    left: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: block;
     font-size: 11pt;
     font-weight: lighter;
-    border-radius: 10px;
+    height: calc(100vh - 60px);
+    left: 20px;
+    min-height: 90vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 30px;
     transition: 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 240px;
 }
 #sidebar h3 {
-    margin: 5px auto 0;
-    font-weight: 500;
     color: white;
+    font-weight: 500;
+    margin: 5px auto 0;
 }
 #sidebar a {
+    color: rgb(200,200,200);
     display: block;
     padding: 5px 10px;
-    color: rgb(200,200,200);
 }
 #sidebar a:hover {
     background: rgb(70,70,70);
@@ -88,8 +88,8 @@ p {
 }
 
 #sidebar .nolist {
-    margin-top: 0;
     margin-bottom: 0;
+    margin-top: 0;
 }
 #sidebar .nolist .nolist li {
     color: rgb(170,170,170);
@@ -97,9 +97,9 @@ p {
 
 #content {
     display: block;
-    padding: 5px 25px;
     margin-left: 265px;
     overflow-x: hidden;
+    padding: 5px 25px;
 }
 
 .maintitle h1 {
@@ -107,11 +107,11 @@ p {
     margin-bottom: 70px;
 }
 .maintitle h3 {
-    text-align: center;
-    text-transform: uppercase;
+    color: rgb(170,170,170);
     font-weight: lighter;
     line-height: 150%;
-    color: rgb(170,170,170);
+    text-align: center;
+    text-transform: uppercase;
 }
 
 
@@ -121,8 +121,8 @@ p {
 }
 
 .textcenter {
-    text-align: center;
     display: block;
+    text-align: center;
 }
 
 .comment {
@@ -132,45 +132,45 @@ p {
 
 .pregroup {
     background: rgb(245,245,245);
+    border-radius: 3px;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     display: block;
     margin: 25px auto 60px;
-    padding-top: 5px;
     overflow-x: auto;
-    border-radius: 3px;
+    padding-top: 5px;
     text-align: left;
 }
 .pregroup pre {
     display: inline-block;
+    height: 20px;
+    line-height: 130%;
+    margin: 0;
     min-width: 100%;
     padding: 5px 25px;
-    line-height: 130%;
-    height: 20px;
-    margin: 0;
 }
 
 .pregroup.inlinepre {
-    width: 47%;
     display: inline-block;
-    vertical-align: top;
     margin-left: 10px;
+    vertical-align: top;
+    width: 47vw;
 }
 
 
 .nolist {
-    margin-top: -2px;
     margin-bottom: 20px;
+    margin-top: -2px;
     padding-left: 0;
 }
 .nolist .nolist {
+    font-size: 10pt;
     margin-top: 0;
     padding-left: 0;
-    font-size: 10pt;
 }
 .nolist .nolist li {
-    padding-left: 35px;
-    line-height: 160%;
     color: rgb(80,80,80);
+    line-height: 160%;
+    padding-left: 35px;
 }
 
 .nolist li {
@@ -185,23 +185,23 @@ p {
 
 .dirtree {
     background: rgb(252,252,252);
-    margin: 30px auto;
-    padding: 5px;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    width: 95%;
-    max-width: 650px;
     border-radius: 5px;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    display: block;
+    margin: 30px auto;
+    max-width: 650px;
+    overflow-x: auto;
+    padding: 5px;
+    white-space: nowrap;
+    width: 95vw;
 }
 .dirtree ul {
-    display: inline-block;
-    padding-left: 25px;
-    font-weight: bolder;
-    margin-bottom: 10px;
-    list-style: none;
     border-left: 1px solid rgb(235,235,235);
+    display: inline-block;
+    font-weight: bolder;
+    list-style: none;
+    margin-bottom: 10px;
+    padding-left: 25px;
 }
 .dirtree ul:first-child {
     border: none;
@@ -213,16 +213,16 @@ p {
     font-weight: normal;
 }
 .treefile {
-    list-style: none;
     font-weight: normal;
+    list-style: none;
 }
 
 
 .obs {
     background: rgba(140,190,255,0.1);
-    padding: 10px 15px;
-    border-radius: 5px;
     border-bottom: 3px solid rgba(80,120,240,0.1);
+    border-radius: 5px;
+    padding: 10px 15px;
 }
 .obs a, .obs a:visited {
     font-weight: bolder;
@@ -231,33 +231,33 @@ p {
 
 @media (max-width: 700px) {
     #sidebar-toggle {
-        display: block;
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        border: 1px solid rgb(110,110,110);
-        border-radius: 100%;
-        z-index: 11;
         background: rgb(40,40,40) url(images/menu.svg) no-repeat center center;
         background-size: 25px 25px;
-        user-select: none;
-        -webkit-user-select: none;
+        border: 1px solid rgb(110,110,110);
+        border-radius: 100%;
         cursor: pointer;
+        display: block;
+        height: 40px;
+        position: fixed;
+        right: 10px;
+        top: 10px;
+        user-select: none;
+        width: 40px;
+        z-index: 11;
+        -webkit-user-select: none;
     }
     #sidebar-toggle.close {
         background-image: url(images/close.svg);
     }
 
     #sidebar {
-        z-index: 10;
         display: none;
+        height: calc(100vh - 10px);
+        left: 5px;
         position: fixed;
         top: 5px;
-        left: 5px;
-        width: calc(100% - 10px);
-        height: calc(100% - 10px);
+        width: calc(100vw - 10px);
+        z-index: 10;
     }
 
     #content {
@@ -265,7 +265,7 @@ p {
     }
 
     .pregroup.inlinepre {
-        width: 95%;
         margin-left: auto;
+        width: 95vw;
     }
 }
