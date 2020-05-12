@@ -145,7 +145,7 @@ p {
     height: 20px;
     line-height: 130%;
     margin: 0;
-    min-width: 100%;
+    min-width: calc(100% - 50px);
     padding: 5px 25px;
 }
 
