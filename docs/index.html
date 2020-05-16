@@ -6,12 +6,12 @@
     <meta name="viewport" 
         content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
     <title>Documentation</title>
-    <link rel="stylesheet" href="docstyle.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-    <div id="sidebar-toggle" onclick="toggleSidebar()"></div>
-    <nav id="sidebar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()"></div>
+    <nav class="sidebar">
         <a href="#"><h3>Start</h3></a>
         <a href="#installingandupdating"><h3>Installing and updating</h3></a>
         <a href="#structure"><h3>Structure</h3></a>
@@ -45,23 +45,23 @@
 
     <script>
         function toggleSidebar () {
-            let sidebar = document.getElementById('sidebar')
-            let toggle = document.getElementById('sidebar-toggle')
+            let sidebar = document.getElementsByClassName('sidebar')[0]
+            let toggle = document.getElementsByClassName('sidebar-toggle')[0]
 
             if (getComputedStyle(sidebar).display === 'none') {
                 sidebar.style.display = 'block'
-                toggle.className = 'close'
+                toggle.className += ' close'
             }
             else {
                 sidebar.removeAttribute('style')
-                toggle.removeAttribute('class')
+                toggle.className = 'sidebar-toggle'
             }
         }
     </script>
 
-    <div id="content">
+    <div class="content">
         <span class="maintitle">
-            <span alt="Logo" id="logo">Lira</span>
+            <span alt="Lira" class="logo">Lira</span>
 
             <h3>Simplicity and organization.</h3>
         </span>

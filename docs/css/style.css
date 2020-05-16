@@ -1,24 +1,80 @@
-html, body {
-    height: 100vh;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: sans-serif;
     font-weight: 100;
-    line-height: 165%;
+    font-size: 12pt;
+    line-height: 1.6em;
 }
 
-a, a:visited, a:hover, a:active {
+a, 
+a:active,
+a:hover,
+a:visited {
     color: rgb(5, 110, 190);
 }
 
-#logo{
-    background: url(images/lira.png) no-repeat center center;
+a,
+a:visited {
+    text-decoration: none;
+}
+
+a:active,
+a:hover {
+    text-decoration: underline;
+}
+
+h1, 
+h2, 
+h3, 
+h4 {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+h1, 
+h2, 
+h3 {
+    font-weight: 100;
+}
+
+h4 {
+    font-weight: 400;
+}
+
+pre {
+    margin: 25px auto;
+    padding: 5px 10px 5px 25px;
+}
+
+p {
+    margin-bottom: 1em;
+    margin-top: 1px;
+    text-align: justify;
+    text-indent: 1.5em;
+}
+
+ol,
+ul {
+    padding-left: 3em;
+}
+
+ol li,
+ul li {
+    line-height: 1.8em;
+}
+
+.logo{
+    background: url(../images/lira.png) no-repeat center center;
     background-size: 200px auto;
     color: transparent;
     display: block;
     height: 190px;
-    margin: 30px auto;
+    margin: 30px auto 20px;
 }
 
 .maintitle h2 {
@@ -27,35 +83,22 @@ a, a:visited, a:hover, a:active {
     text-transform: uppercase;
 }
 
-h1, h2, h3 {
-    font-weight: 100;
-}
-
-h4 {
-    font-weight: 400;
-}
-
-#sidebar a, #sidebar a:visited, .nolist a, .nolist a:visited, a h2, a h3,
-.lv2-content a, .lv2-content a:visited {
+.sidebar a, 
+.sidebar a:visited, 
+.nolist a, 
+.nolist a:visited, 
+a h2, 
+a h3,
+.lv2-content a, 
+.lv2-content a:visited {
     text-decoration: none;
 }
 
-pre {
-    font-size: 110%;
-    margin: 25px auto;
-    padding: 5px 10px 5px 25px;
-}
-
-
-p {
-    text-align: justify;
-}
-
-#sidebar-toggle {
+.sidebar-toggle {
     display: none;
 }
 
-#sidebar {
+.sidebar {
     background: rgb(40,40,40);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -69,52 +112,45 @@ p {
     overflow-y: auto;
     position: fixed;
     top: 30px;
-    transition: 0.3s;
     width: 240px;
 }
-#sidebar h3 {
+.sidebar h3 {
     color: white;
     font-weight: 500;
     margin: 5px auto 0;
 }
-#sidebar a {
+.sidebar a {
     color: rgb(200,200,200);
     display: block;
     padding: 5px 10px;
 }
-#sidebar a:hover {
+.sidebar a:hover {
     background: rgb(70,70,70);
     transition: 0.3s;
 }
 
-#sidebar .nolist {
+.sidebar .nolist {
     margin-bottom: 0;
     margin-top: 0;
 }
-#sidebar .nolist .nolist li {
+.sidebar .nolist .nolist li {
     color: rgb(170,170,170);
 }
 
-#content {
+.content {
     display: block;
     margin-left: 265px;
     overflow-x: hidden;
     padding: 5px 25px;
 }
 
-.maintitle h1 {
-    font-size: 500%;
-    margin-bottom: 70px;
-}
 .maintitle h3 {
     color: rgb(170,170,170);
     font-weight: lighter;
-    line-height: 150%;
+    line-height: 1.5em;
     text-align: center;
     text-transform: uppercase;
 }
-
-
 
 .grayfont {
     color: rgb(150,150,150);
@@ -126,7 +162,7 @@ p {
 }
 
 .comment {
-    color: rgba(40,100,255,0.6);
+    color: rgb(40,180,40);
 }
 
 
@@ -140,12 +176,14 @@ p {
     padding-top: 5px;
     text-align: left;
 }
+
 .pregroup pre {
     display: inline-block;
+    font-size: 0.9em;
     height: 20px;
-    line-height: 130%;
+    line-height: 1.3em;
     margin: 0;
-    min-width: calc(100% - 50px);
+    min-width: 100%;
     padding: 5px 25px;
 }
 
@@ -169,7 +207,7 @@ p {
 }
 .nolist .nolist li {
     color: rgb(80,80,80);
-    line-height: 160%;
+    line-height: 1.6em;
     padding-left: 35px;
 }
 
@@ -193,7 +231,6 @@ p {
     overflow-x: auto;
     padding: 5px;
     white-space: nowrap;
-    width: 95vw;
 }
 .dirtree ul {
     border-left: 1px solid rgb(235,235,235);
@@ -230,11 +267,12 @@ p {
 
 
 @media (max-width: 700px) {
-    #sidebar-toggle {
-        background: rgb(40,40,40) url(images/menu.svg) no-repeat center center;
+    .sidebar-toggle {
+        background: rgb(40,40,40) url(../images/menu.svg) no-repeat center center;
         background-size: 25px 25px;
         border: 1px solid rgb(110,110,110);
-        border-radius: 100%;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         cursor: pointer;
         display: block;
         height: 40px;
@@ -243,24 +281,24 @@ p {
         top: 10px;
         user-select: none;
         width: 40px;
-        z-index: 11;
+        z-index: 2;
         -webkit-user-select: none;
     }
-    #sidebar-toggle.close {
-        background-image: url(images/close.svg);
+    .sidebar-toggle.close {
+        background-image: url(../images/close.svg);
     }
 
-    #sidebar {
+    .sidebar {
         display: none;
         height: calc(100vh - 10px);
         left: 5px;
         position: fixed;
         top: 5px;
         width: calc(100vw - 10px);
-        z-index: 10;
+        z-index: 1;
     }
 
-    #content {
+    .content {
         margin: 0;
     }
 
