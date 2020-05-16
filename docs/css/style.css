@@ -123,10 +123,10 @@ a h3,
     color: rgb(200,200,200);
     display: block;
     padding: 5px 10px;
+    transition: background-color 0.3s;
 }
 .sidebar a:hover {
     background: rgb(70,70,70);
-    transition: 0.3s;
 }
 
 .sidebar .nolist {
