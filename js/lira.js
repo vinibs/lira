@@ -148,6 +148,7 @@ class Router {
     execRoute (route) {
         const type = typeof route.component
         const params = this.getUrlParams(route)
+        let returnData = null
         // Sets the route's params in HTTP object
         http.params = params
 
@@ -165,9 +166,14 @@ class Router {
                 if (appElement.length <= 0)
                     throw `Can't find "lira-app" root component`
 
-                return appElement[0].innerHTML = `
-                    <${route.component}></${route.component}>
-                `
+                // Reset the base tag to scroll to top
+                appElement[0].innerHTML = ``
+
+                // Wait 20ms to load the new content
+                return setTimeout(
+                    () => appElement[0].innerHTML = 
+                        `<${route.component}></${route.component}>`
+                    , 20)
                 
             default:
                 throw `Component attribute must be a function or a valid `
