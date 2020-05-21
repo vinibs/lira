@@ -166,14 +166,10 @@ class Router {
                 if (appElement.length <= 0)
                     throw `Can't find "lira-app" root component`
 
-                // Reset the base tag to scroll to top
-                appElement[0].innerHTML = ``
-
-                // Wait 20ms to load the new content
-                return setTimeout(
-                    () => appElement[0].innerHTML = 
-                        `<${route.component}></${route.component}>`
-                    , 20)
+                appElement[0].innerHTML = 
+                    `<${route.component}></${route.component}>`
+                scroll(0,0)
+                break;
                 
             default:
                 throw `Component attribute must be a function or a valid `
