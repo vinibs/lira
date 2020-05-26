@@ -276,11 +276,11 @@
                     exists in your project),
                 </li>
                 <li>
-                    Remove the references to the manifest's and the icons' files
+                    Remove the references to the manifest and the icons files
                     from the <b>index.html</b> file.
                 </li>
             </ul>
-            After these steps, yout Lira website should behave as just a browser's
+            After these steps, yout Lira website should behave as just a browser
             web app, not as a PWA anymore.
         </p>
         <p>
@@ -362,7 +362,7 @@
             This property gets the current mode the app is running. Its value
             can be <b>browser</b>, <b>standalone</b>, <b>minimal-ui</b> or
             <b>fullscreen</b>. This value is set using the <b>CSS media 
-            attribute</b> to inform how the app is being accessed currently.
+            attribute</b> to inform how the app is currently being accessed.
         </p>
         <p>
             When the website or application is accessed through the browser,
@@ -391,9 +391,9 @@
         </p>
         <p>
             It receives a <b>string as the first parameter</b>, which defines
-            the app mode needs to be listened. The second parameter this method
-            receives is <b>the callback function</b> to be executed when the 
-            desired app mode is used to view the page.
+            the app mode that needs to be listened. The second parameter this 
+            method receives is <b>the callback function</b> to be executed 
+            when the desired app mode is used to view the page.
         </p>
         <p>
             This method adds a listener for the change of the app mode 
@@ -437,15 +437,15 @@
         <p>
             This <b>route.set()</b> method expects 2 parameters: the route 
             <u>path</u> and the <u>component</u> that will be rendered when the
-            given path is accessed by the users.
+            given path is accessed by users.
         </p>
         <p>
             When defining a route to a custom element, <b>the routes.js file
             must contain the imports of those components that will be used
-            by a route</b>. These imports must be in de beginning of the file 
+            by a route</b>. These imports must be in the beginning of the file 
             in order to work correctly and the imports need to refer the whole 
-            JS component's file (not like importing an exported module) and must 
-            include its file extension.
+            JS component's file (not like importing an exported module), 
+            including its file extension.
         </p>
 
         <span class="pregroup">
@@ -493,7 +493,7 @@
             The <b>component</b> param is a string that defines the name of
             the custom element's tag to be used for the path or a function 
             that should execute when the URL is reached. If the component
-            is a function, nothing will be rendered on the browser unless the
+            is a function, nothing will be rendered unless the
             component tells the browser to do this, as calling some 
             <i>element.innerHTML = {content}</i> inside the function.
         </p>
@@ -524,7 +524,7 @@
         
         <p class="obs">
             <b>Note:</b> keep in mind that the <b>path</b> parameter, when
-            defines with an empty string (<b>""</b>), means the same as being
+            defined with an empty string (<b>""</b>), means the same as being
             set to the application root path (<b>"/"</b>). Both params are
             needed to define a route.
         </p>
@@ -534,7 +534,7 @@
         <h3 id="paramroute">Param route</h3>
         <p>
             Lira also supports parameterized routes. This means that users
-            can pass values for the application directly within the route.
+            can pass values to the application directly within the route.
             With this, a route defined with a parameter, let's call it "id",
             can receive any value in the "id" position of the URL and use it
             inside the rendered component.
@@ -592,19 +592,19 @@
         <p>
             By default, components have a <b>render()</b> method (to be 
             a little similar to React), but they doesn't need to. All the
-            component's life cycle is defined within the own class. Anyway,
+            component's life cycle is defined within its own class. Anyway,
             having a method that just returns the element's inner HTML could
             be helpful to organize things.
         </p>
         <p>
             As documented by Google, custom elements have their own life
             cycle methods, and they are also useful in Lira. So, using
-            the constructor to initialize properties of the component or
+            the constructor to initialize component's properties or
             using the <b>connectedCallback()</b> method to set its inner
             content when it is attached to de DOM are also helpful.
         </p>
         <p>
-            However, Lira has two specificities whem the matter is its
+            However, Lira has two specificities when the matter is its
             components: <b>the classes' files must declare its own
             custom HTML tags</b> and <b>every class that uses another
             component's custom tag should import it by itself</b>. 
@@ -617,8 +617,8 @@
             instead of importing an exported component from the file.
         </p>
         <p>
-            To define a component, an order must be follow in order to 
-            everything work as espected: first, de file need to run 
+            To define a component, an order must be followed in order to 
+            everything work as expected: first, the file needs to run 
             <b>all its imports</b>. Then, the <b>component's class</b> must 
             be defined. At last, at the end of the file, outside the class
             or any function, the <b>element's custom tag</b> must be defined.
@@ -627,7 +627,7 @@
         <div class="pregroup">
             <pre><b class="comment">Example of HomePage's component file</b></pre>
             <pre>import '../components/main-menu.js' <i class="comment"
-                >// Imports the whole file (with the <b>.js</b> extension</i></pre>
+                >// Imports the whole file (with the <b>.js</b> extension)</i></pre>
             <pre></pre>
             <pre>class HomePage <i>extends HTMLElement</i> { <i class="comment"
                 >// Defines the class, extending HTMLElement</i></pre>
