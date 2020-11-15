@@ -140,6 +140,7 @@
                             <li class="treefile">init.js</li>
                             <li class="treefile">routes.js</li>
                         </ul>
+                        <li class="treefile">lira-app.js</li>
                     </ul>
 
                     <li class="treefile">
@@ -174,7 +175,7 @@
             the <b>/src</b> directory to store your web components and
             to separate reusable components (in a directory like
             <b>/src/components</b>) from the pages' main files (in a 
-            folder like <b>/src/view</b>). The
+            folder like <b>/src/pages</b>). The
             <a href="https://github.com/vinibs/lira" target="_blank">
             project's repository</a> shows a structure that is based
             on these recomendations.
@@ -253,12 +254,22 @@
         </p>
         <p>
             In the same folder, there is also an initialization file 
-            (<b>config/inite.js</b>), which is meant to store the main 
+            (<b>config/init.js</b>), which is meant to store the main 
             imports used in the application and any other stuff that need 
             to be done and applied to the hole app. It is initialized right 
             after <i>config.js</i>. All general custom elements imports can
             be stored in this file to get all of them ready to use in the 
             general HTML or other custom elements.
+        </p>
+        <p>
+            Besides of the configuration and initialization files, there is also a 
+            default app component class (<b>src/lira-app.js</b>). This file is
+            responsible for setting the base template for the app. It has initially 
+            only the <b><i>&lt;route-contents&gt;</i></b> custom element, which is 
+            responsible for setting and rendering the app's routes contents, so 
+            it must be present in order so the routing properly works. However, 
+            this class can render any other component, like a default navigation 
+            bar or other elements that won't change between the app's pages.
         </p>
 
         <br/>

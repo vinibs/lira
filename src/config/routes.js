@@ -1,13 +1,13 @@
 // Imports the route instance to set the App's routes
 import { route } from '../../js/lira.js'
 
-import '../view/index.js'
-import '../view/errors/not-found.js'
-import '../view/pages/parameter.js'
-import '../view/pages/app-status.js'
+import '../pages/index.js'
+import '../pages/errors/not-found.js'
+import '../pages/parameter.js'
+import '../pages/app-status.js'
 
 route.set('func-route', () => {
-    document.getElementsByTagName('lira-app')[0].innerHTML = `
+    document.getElementsByTagName('route-contents')[0].innerHTML = `
         <h2>Function route</h2>
         <p>This route receives a JS function istead of a custom element.</p>
         <br/>

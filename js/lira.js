@@ -165,9 +165,13 @@ class Router {
                 
                 let appElement = document.getElementsByTagName('lira-app')
                 if (appElement.length <= 0)
-                    throw `Can't find "lira-app" root component`
+                throw `Can't find "lira-app" root component`
+                
+                let routeContents = document.getElementsByTagName('route-contents')
+                if (routeContents.length <= 0)
+                throw `Can't find "route-contents" base component`
 
-                appElement[0].innerHTML = 
+                routeContents[0].innerHTML = 
                     `<${route.component}></${route.component}>`
                 scroll(0,0)
                 break;
@@ -297,7 +301,7 @@ class HTTP {
 
         // Get the status of the desired mode
         window.matchMedia(`(display-mode: ${desiredMode})`)
-            .addListener((e) => {
+            .addEventListener((e) => {
                 // Does the current mode corresponds to the desired one?
                 if (e.matches)
                     callback(e)
@@ -307,9 +311,11 @@ class HTTP {
 
 }
 
-// Defines the default empty class for <lira-app> component
-/** @class App */
-class App extends HTMLElement { }
+
+// Defines the default empty class for <route-contents> component
+/** @class RouteContents */
+class RouteContents extends HTMLElement { }
+import '../src/lira-app.js'
 
 
 /**
@@ -323,7 +329,7 @@ class Lira {
      */
     constructor (route) {
         // Defines the custom element tag so it can be used in DOM
-        window.customElements.define('lira-app', App)
+        window.customElements.define('route-contents', RouteContents)
         
         // Once app is started, start the router
         /** @private */

@@ -2,7 +2,7 @@
  * Based on Google Custom Elements documentation:
  * https://developers.google.com/web/fundamentals/web-components/customelements
  */
-import '../../components/links.js'
+import '../components/links.js'
 import { http } from '../../../js/lira.js'
 
 // Defines the custom element's class
