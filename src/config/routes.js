@@ -5,7 +5,6 @@ import '../view/index.js'
 import '../view/errors/not-found.js'
 import '../view/pages/parameter.js'
 import '../view/pages/app-status.js'
-import '../components/links.js'
 
 route.set('func-route', () => {
     document.getElementsByTagName('lira-app')[0].innerHTML = `

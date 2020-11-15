@@ -4,6 +4,7 @@
  */
 
 import config from '../src/config/config.js'
+import '../src/config/init.js'
 
 // Checks if the browser supports Custom Elements v1
 if (!('customElements' in window))
