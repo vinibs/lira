@@ -301,7 +301,7 @@ class HTTP {
 
         // Get the status of the desired mode
         window.matchMedia(`(display-mode: ${desiredMode})`)
-            .addEventListener((e) => {
+            .addEventListener('change', (e) => {
                 // Does the current mode corresponds to the desired one?
                 if (e.matches)
                     callback(e)
