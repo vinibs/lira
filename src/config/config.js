@@ -1,3 +1,4 @@
 export default {
-    "pwa-enabled": true
+    "pwa-enabled": true,
+    "cache-styles": true,
 }
