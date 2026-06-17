@@ -377,7 +377,7 @@ class LiraElement extends HTMLElement {
 
     /**
      * Default behavior on slot change
-     * @param {Event} event
+     * @param {Event} event 
      */
     onSlotChange (event) {
         this._execRender
@@ -389,12 +389,16 @@ class LiraElement extends HTMLElement {
      */
     useStyle (cssFileRelativePath) {
         this._useStyle = true
-        this._stylePath = parseFilePath(
+        if (!this._stylePaths) {
+            this._stylePaths = []
+        }
+
+        const stylePath = parseFilePath(
             cssFileRelativePath,
             this.currentDirectory
         )
-
-        styleLoader.loadStyle(this._stylePath)
+        this._stylePaths.push(stylePath)
+        styleLoader.loadStyle(stylePath)
     }
 
     /**
@@ -413,17 +417,29 @@ class LiraElement extends HTMLElement {
 
         if (!this._useStyle) return renderWith('')
 
-        styleLoader.getStyleContent(this._stylePath)
-            .then((styles) => {
-                const styleContent = `
-                <style>
-                    ${styles}
-                </style>
-                `
-                renderWith(styleContent)
-            })
-            .catch((error) => {
-                renderWith('')
+        var allStyleContents = ''
+        const stylePromises = []
+
+        for (const stylePath of this._stylePaths) {
+            stylePromises.push(
+                styleLoader.getStyleContent(stylePath)
+                .then((styles) => {
+                    const styleContent = `
+                    <style>
+                        ${styles}
+                    </style>
+                    `
+                    allStyleContents += styleContent
+                })
+                .catch((error) => {
+                    console.error('Failed to load style contents from ', stylePath)
+                })
+            )
+        }
+
+        Promise.allSettled(stylePromises)
+            .finally(() => {
+                renderWith(allStyleContents)
             })
     }
 
